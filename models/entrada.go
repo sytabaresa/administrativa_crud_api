@@ -11,7 +11,7 @@ import (
 )
 
 type Entrada struct {
-	Id                      int       `orm:"column(id_entrada);pk"`
+	Id                      int       `orm:"column(id_entrada);pk;auto"`
 	FechaRegistro           time.Time `orm:"column(fecha_registro);type(date);null"`
 	Consecutivo             int       `orm:"column(consecutivo)"`
 	Vigencia                string    `orm:"column(vigencia);null"`

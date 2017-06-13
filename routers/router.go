@@ -205,6 +205,11 @@ func init() {
 				&controllers.ServicioNecesidadController{},
 			),
 		),
+		beego.NSNamespace("/entrada",
+			beego.NSInclude(
+				&controllers.EntradaController{},
+			),
+		),
 	)
 	beego.AddNamespace(ns)
 }

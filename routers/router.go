@@ -140,6 +140,11 @@ func init() {
 				&controllers.ContratoGeneralController{},
 			),
 		),
+		beego.NSNamespace("/contrato_disponibilidad",
+			beego.NSInclude(
+				&controllers.ContratoDisponibilidadController{},
+			),
+		),
 		beego.NSNamespace("/acta_inicio",
 			beego.NSInclude(
 				&controllers.ActaInicioController{},

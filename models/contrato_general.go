@@ -44,6 +44,7 @@ type ContratoGeneral struct {
 	ClaseContratista int    `orm:"column(clase_contratista)"`
 	Convenio         string `orm:"column(convenio);null"`
 	NumeroConstancia int    `orm:"column(numero_constancia);null"`
+	RegistroPresupuestal int    `orm:"column(resgistro_presupuestal);null"`
 	Estado           bool   `orm:"column(estado);null"`
 	TipoContrato                 *TipoContrato         `orm:"column(tipo_contrato);rel(fk)"`
 	LugarEjecucion               *LugarEjecucion       `orm:"column(lugar_ejecucion);rel(fk)"`

@@ -16,198 +16,486 @@ import (
 func init() {
 	ns := beego.NewNamespace("/v1",
 
-		beego.NSNamespace("/necesidad_rechazada",
+		beego.NSNamespace("/poliza",
 			beego.NSInclude(
-				&controllers.NecesidadRechazadaController{},
+				&controllers.PolizaController{},
 			),
 		),
 
-		beego.NSNamespace("/vigencia_contrato",
+		beego.NSNamespace("/estado_contrato",
 			beego.NSInclude(
-				&controllers.VigenciaContratoController{},
+				&controllers.EstadoContratoController{},
 			),
 		),
 
-		beego.NSNamespace("/solicitud_disponibilidad",
+		beego.NSNamespace("/contrato_estado",
 			beego.NSInclude(
-				&controllers.SolicitudDisponibilidadController{},
+				&controllers.ContratoEstadoController{},
+			),
+		),
+		beego.NSNamespace("/tipo_movimiento",
+			beego.NSInclude(
+				&controllers.TipoMovimientoController{},
+			),
+		),
+		beego.NSNamespace("/movimiento_fuente_financiamiento_apropiacion",
+			beego.NSInclude(
+				&controllers.MovimientoFuenteFinanciamientoApropiacionController{},
 			),
 		),
 
-		beego.NSNamespace("/necesidad_otro_si",
+		beego.NSNamespace("/fuente_financiamiento",
 			beego.NSInclude(
-				&controllers.NecesidadOtroSiController{},
+				&controllers.FuenteFinanciamientoController{},
+			),
+		),
+		beego.NSNamespace("/fuente_financiamiento_apropiacion",
+			beego.NSInclude(
+				&controllers.FuenteFinanciamientoApropiacionController{},
 			),
 		),
 
-		beego.NSNamespace("/actividad_especifica",
+		beego.NSNamespace("/requisito_avance",
 			beego.NSInclude(
-				&controllers.ActividadEspecificaController{},
+				&controllers.RequisitoAvanceController{},
 			),
 		),
 
-		beego.NSNamespace("/servicio",
+		beego.NSNamespace("/presupuesto_avance",
 			beego.NSInclude(
-				&controllers.ServicioController{},
+				&controllers.PresupuestoAvanceController{},
 			),
 		),
 
-		beego.NSNamespace("/necesidad",
+		beego.NSNamespace("/estados",
 			beego.NSInclude(
-				&controllers.NecesidadController{},
+				&controllers.EstadosController{},
 			),
 		),
 
-		beego.NSNamespace("/dependencia_necesidad",
+		beego.NSNamespace("/estado_avance",
 			beego.NSInclude(
-				&controllers.DependenciaNecesidadController{},
+				&controllers.EstadoAvanceController{},
 			),
 		),
 
-		beego.NSNamespace("/modalidad_seleccion",
+		beego.NSNamespace("/solicitud_avance",
 			beego.NSInclude(
-				&controllers.ModalidadSeleccionController{},
+				&controllers.SolicitudAvanceController{},
 			),
 		),
 
-		beego.NSNamespace("/tipo_rubro",
+		beego.NSNamespace("/tipo_avance",
 			beego.NSInclude(
-				&controllers.TipoRubroController{},
+				&controllers.TipoAvanceController{},
 			),
 		),
 
-		beego.NSNamespace("/actividad_solicitud_necesidad",
+		beego.NSNamespace("/solicitud_tipo_avance",
 			beego.NSInclude(
-				&controllers.ActividadSolicitudNecesidadController{},
+				&controllers.SolicitudTipoAvanceController{},
 			),
 		),
 
-		beego.NSNamespace("/estado_necesidad",
+		beego.NSNamespace("/requisito_tipo_avance",
 			beego.NSInclude(
-				&controllers.EstadoNecesidadController{},
+				&controllers.RequisitoTipoAvanceController{},
 			),
 		),
 
-		beego.NSNamespace("/requisito_minimo",
+		beego.NSNamespace("/solicitud_requisito_tipo_avance",
 			beego.NSInclude(
-				&controllers.RequisitoMinimoController{},
+				&controllers.SolicitudRequisitoTipoAvanceController{},
 			),
 		),
 
-		beego.NSNamespace("/marco_legal",
+		beego.NSNamespace("/anulacion_registro_presupuestal",
 			beego.NSInclude(
-				&controllers.MarcoLegalController{},
+				&controllers.AnulacionRegistroPresupuestalController{},
 			),
 		),
 
-		beego.NSNamespace("/marco_legal_necesidad",
+		beego.NSNamespace("/anulacion_registro_presupuestal_disponibilidad_apropiacion",
 			beego.NSInclude(
-				&controllers.MarcoLegalNecesidadController{},
+				&controllers.AnulacionRegistroPresupuestalDisponibilidadApropiacionController{},
 			),
 		),
 
-		beego.NSNamespace("/supervisor_solicitud_necesidad",
+		beego.NSNamespace("/anulacion_disponibilidad",
 			beego.NSInclude(
-				&controllers.SupervisorSolicitudNecesidadController{},
+				&controllers.AnulacionDisponibilidadController{},
 			),
 		),
 
-		beego.NSNamespace("/actividad_economica_necesidad",
+		beego.NSNamespace("/anulacion_disponibilidad_apropiacion",
 			beego.NSInclude(
-				&controllers.ActividadEconomicaNecesidadController{},
+				&controllers.AnulacionDisponibilidadApropiacionController{},
 			),
 		),
 
-		beego.NSNamespace("/especificacion_tecnica",
+		beego.NSNamespace("/anulacion_reserva",
 			beego.NSInclude(
-				&controllers.EspecificacionTecnicaController{},
+				&controllers.AnulacionReservaController{},
 			),
 		),
 
-		beego.NSNamespace("/fuente_financiacion_rubro_necesidad",
+		beego.NSNamespace("/estado_apropiacion",
 			beego.NSInclude(
-				&controllers.FuenteFinanciacionRubroNecesidadController{},
+				&controllers.EstadoApropiacionController{},
 			),
 		),
 
-		beego.NSNamespace("/tr_necesidad",
+		beego.NSNamespace("/estado_disponibilidad",
 			beego.NSInclude(
-				&controllers.TrNecesidadController{},
+				&controllers.EstadoDisponibilidadController{},
 			),
 		),
-		beego.NSNamespace("/contrato_general",
+
+		beego.NSNamespace("/disponibilidad",
 			beego.NSInclude(
-				&controllers.ContratoGeneralController{},
+				&controllers.DisponibilidadController{},
 			),
 		),
-		beego.NSNamespace("/contrato_disponibilidad",
+
+		beego.NSNamespace("/apropiacion",
 			beego.NSInclude(
-				&controllers.ContratoDisponibilidadController{},
+				&controllers.ApropiacionController{},
 			),
 		),
-		beego.NSNamespace("/acta_inicio",
+
+		beego.NSNamespace("/modificacion_presupuestal",
 			beego.NSInclude(
-				&controllers.ActaInicioController{},
+				&controllers.ModificacionPresupuestalController{},
 			),
 		),
-		beego.NSNamespace("/solicitud_rp",
+
+		beego.NSNamespace("/estado_registro_presupuestal",
 			beego.NSInclude(
-				&controllers.SolicitudRpController{},
+				&controllers.EstadoRegistroPresupuestalController{},
 			),
 		),
-		beego.NSNamespace("/disponibilidad_apropiacion_solicitud_rp",
+
+		beego.NSNamespace("/disponibilidad_apropiacion",
 			beego.NSInclude(
-				&controllers.Disponibilidad_apropiacion_solicitud_rpController{},
+				&controllers.DisponibilidadApropiacionController{},
 			),
 		),
-		beego.NSNamespace("/acta_contrato",
+
+		beego.NSNamespace("/registro_presupuestal_disponibilidad_apropiacion",
 			beego.NSInclude(
-				&controllers.ActaInicioContratoGeneralController{},
+				&controllers.RegistroPresupuestalDisponibilidadApropiacionController{},
 			),
 		),
-		beego.NSNamespace("/ordenadores",
+
+		beego.NSNamespace("/estado_reserva_presupuestal",
 			beego.NSInclude(
-				&controllers.ArgoOrdenadoresController{},
+				&controllers.EstadoReservaPresupuestalController{},
 			),
 		),
-		beego.NSNamespace("/parametros",
+
+		beego.NSNamespace("/reserva_presupuestal",
 			beego.NSInclude(
-				&controllers.ParametrosController{},
+				&controllers.ReservaPresupuestalController{},
 			),
 		),
-		beego.NSNamespace("/parametro_estandar",
+
+		beego.NSNamespace("/rubro_homologado",
 			beego.NSInclude(
-				&controllers.ParametroEstandarController{},
+				&controllers.RubroHomologadoController{},
 			),
 		),
-		beego.NSNamespace("/relacion_parametro",
+
+		beego.NSNamespace("/rubro_rubro",
 			beego.NSInclude(
-				&controllers.RelacionParametroController{},
+				&controllers.RubroRubroController{},
 			),
 		),
-		beego.NSNamespace("/informacion_proveedor",
+
+		beego.NSNamespace("/nivel_clasificacion",
 			beego.NSInclude(
-				&controllers.InformacionProveedorController{},
+				&controllers.NivelClasificacionController{},
 			),
 		),
-		beego.NSNamespace("/supervisor",
+
+		beego.NSNamespace("/tipo_documento_afectante",
 			beego.NSInclude(
-				&controllers.SupervisorContratoController{},
+				&controllers.TipoDocumentoAfectanteController{},
 			),
 		),
-		beego.NSNamespace("/catalogo_elemento",
+
+		beego.NSNamespace("/movimiento_contable",
 			beego.NSInclude(
-				&controllers.CatalogoElementoController{},
+				&controllers.MovimientoContableController{},
 			),
 		),
-		beego.NSNamespace("/catalogo_elemento_grupo",
+
+		beego.NSNamespace("/estructura_cuentas",
 			beego.NSInclude(
-				&controllers.CatalogoElementoGrupoController{},
+				&controllers.EstructuraCuentasController{},
 			),
 		),
-		beego.NSNamespace("/servicio_necesidad",
+
+		beego.NSNamespace("/periodo_contable",
 			beego.NSInclude(
-				&controllers.ServicioNecesidadController{},
+				&controllers.PeriodoContableController{},
+			),
+		),
+
+		beego.NSNamespace("/plan_cuentas",
+			beego.NSInclude(
+				&controllers.PlanCuentasController{},
+			),
+		),
+
+		beego.NSNamespace("/periodo_plan_cuentas",
+			beego.NSInclude(
+				&controllers.PeriodoPlanCuentasController{},
+			),
+		),
+
+		beego.NSNamespace("/cuenta_contable",
+			beego.NSInclude(
+				&controllers.CuentaContableController{},
+			),
+		),
+
+		beego.NSNamespace("/concepto_cuenta_contable",
+			beego.NSInclude(
+				&controllers.ConceptoCuentaContableController{},
+			),
+		),
+
+		beego.NSNamespace("/tipo_cuenta_bancaria",
+			beego.NSInclude(
+				&controllers.TipoCuentaBancariaController{},
+			),
+		),
+
+		beego.NSNamespace("/tipo_recurso",
+			beego.NSInclude(
+				&controllers.TipoRecursoController{},
+			),
+		),
+
+		beego.NSNamespace("/cuenta_bancaria",
+			beego.NSInclude(
+				&controllers.CuentaBancariaController{},
+			),
+		),
+
+		beego.NSNamespace("/tipo_entidad",
+			beego.NSInclude(
+				&controllers.TipoEntidadController{},
+			),
+		),
+
+		beego.NSNamespace("/entidad",
+			beego.NSInclude(
+				&controllers.EntidadController{},
+			),
+		),
+
+		beego.NSNamespace("/categoria_compromiso",
+			beego.NSInclude(
+				&controllers.CategoriaCompromisoController{},
+			),
+		),
+
+		beego.NSNamespace("/tipo_compromiso_tesoral",
+			beego.NSInclude(
+				&controllers.TipoCompromisoTesoralController{},
+			),
+		),
+
+		beego.NSNamespace("/estado_compromiso",
+			beego.NSInclude(
+				&controllers.EstadoCompromisoController{},
+			),
+		),
+
+		beego.NSNamespace("/compromiso",
+			beego.NSInclude(
+				&controllers.CompromisoController{},
+			),
+		),
+
+		beego.NSNamespace("/version_tipo_transaccion",
+			beego.NSInclude(
+				&controllers.VersionTipoTransaccionController{},
+			),
+		),
+
+		beego.NSNamespace("/tipo_transaccion",
+			beego.NSInclude(
+				&controllers.TipoTransaccionController{},
+			),
+		),
+
+		beego.NSNamespace("/modulo_kronos",
+			beego.NSInclude(
+				&controllers.ModuloKronosController{},
+			),
+		),
+
+		beego.NSNamespace("/clase_transaccion",
+			beego.NSInclude(
+				&controllers.ClaseTransaccionController{},
+			),
+		),
+
+		beego.NSNamespace("/tipo_afectacion",
+			beego.NSInclude(
+				&controllers.TipoAfectacionController{},
+			),
+		),
+
+		beego.NSNamespace("/afectacion_concepto",
+			beego.NSInclude(
+				&controllers.AfectacionConceptoController{},
+			),
+		),
+
+		beego.NSNamespace("/concepto_concepto",
+			beego.NSInclude(
+				&controllers.ConceptoConceptoController{},
+			),
+		),
+
+		beego.NSNamespace("/tipo_concepto",
+			beego.NSInclude(
+				&controllers.TipoConceptoController{},
+			),
+		),
+
+		beego.NSNamespace("/rubro",
+			beego.NSInclude(
+				&controllers.RubroController{},
+			),
+		),
+
+		beego.NSNamespace("/forma_ingreso",
+			beego.NSInclude(
+				&controllers.FormaIngresoController{},
+			),
+		),
+
+		beego.NSNamespace("/estado_ingreso",
+			beego.NSInclude(
+				&controllers.EstadoIngresoController{},
+			),
+		),
+
+		beego.NSNamespace("/ingreso",
+			beego.NSInclude(
+				&controllers.IngresoController{},
+			),
+		),
+
+		beego.NSNamespace("/ingreso_concepto",
+			beego.NSInclude(
+				&controllers.IngresoConceptoController{},
+			),
+		),
+
+		beego.NSNamespace("/unidad_ejecutora",
+			beego.NSInclude(
+				&controllers.UnidadEjecutoraController{},
+			),
+		),
+
+		beego.NSNamespace("/estado_orden_pago",
+			beego.NSInclude(
+				&controllers.EstadoOrdenPagoController{},
+			),
+		),
+
+		beego.NSNamespace("/tipo_orden_pago",
+			beego.NSInclude(
+				&controllers.TipoOrdenPagoController{},
+			),
+		),
+
+		beego.NSNamespace("/registro_presupuestal",
+			beego.NSInclude(
+				&controllers.RegistroPresupuestalController{},
+			),
+		),
+
+		beego.NSNamespace("/orden_pago",
+			beego.NSInclude(
+				&controllers.OrdenPagoController{},
+			),
+		),
+
+		beego.NSNamespace("/concepto",
+			beego.NSInclude(
+				&controllers.ConceptoController{},
+			),
+		),
+
+		beego.NSNamespace("/concepto_orden_pago",
+			beego.NSInclude(
+				&controllers.ConceptoOrdenPagoController{},
+			),
+		),
+
+		beego.NSNamespace("/estructura_niveles_clasificacion",
+			beego.NSInclude(
+				&controllers.EstructuraNivelesClasificacionController{},
+			),
+		),
+
+		beego.NSNamespace("/arbol_conceptos",
+			beego.NSInclude(
+				&controllers.ArbolConceptosController{},
+			),
+		),
+
+		beego.NSNamespace("/tr_concepto",
+			beego.NSInclude(
+				&controllers.TrConceptoController{},
+			),
+		),
+
+		beego.NSNamespace("/categoria_iva",
+			beego.NSInclude(
+				&controllers.CategoriaIvaController{},
+			),
+		),
+
+		beego.NSNamespace("/iva",
+			beego.NSInclude(
+				&controllers.IvaController{},
+			),
+		),
+
+		beego.NSNamespace("/arbol_plan_cuentas",
+			beego.NSInclude(
+				&controllers.ArbolPlanCuentasController{},
+			),
+		),
+
+		beego.NSNamespace("/tr_cuentas_contables",
+			beego.NSInclude(
+				&controllers.TrCuentasContablesController{},
+			),
+		),
+
+		beego.NSNamespace("/tipo_cuenta_especial",
+			beego.NSInclude(
+				&controllers.TipoCuentaEspecialController{},
+			),
+		),
+
+		beego.NSNamespace("/cuenta_especial",
+			beego.NSInclude(
+				&controllers.CuentaEspecialController{},
+			),
+		),
+
+		beego.NSNamespace("/homologacion_concepto",
+			beego.NSInclude(
+				&controllers.HomologacionConceptoController{},
 			),
 		),
 	)

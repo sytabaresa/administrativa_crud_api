@@ -37,7 +37,7 @@ func AddTrNecesidad(m *TrNecesidad) (alerta []string, err error) {
 	m.SupervisorSolicitudNecesidad.FechaAsginacion = time.Now()
 	m.Necesidad.FechaModificacion = time.Now()
 	var a []int
-	_, err = o.Raw("SELECT MAX(numero_elaboracion)+1 FROM administrativa.necesidad WHERE vigencia=" + strconv.Itoa((m.Necesidad.FechaSolicitud).Year()) + ";").QueryRows(&a)
+	_, err = o.Raw("SELECT COALESCE(MAX(numero_elaboracion), 0)+1 FROM administrativa.necesidad WHERE vigencia=" + strconv.Itoa((m.Necesidad.FechaSolicitud).Year()) + ";").QueryRows(&a)
 	m.Necesidad.NumeroElaboracion = a[0]
 	if id, err = o.Insert(m.Necesidad); err == nil {
 		//m.Necesidad.Id = int(id)

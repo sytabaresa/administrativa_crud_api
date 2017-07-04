@@ -18,6 +18,7 @@ type SolicitudDisponibilidad struct {
 	FechaSolicitud time.Time  `orm:"column(fecha_solicitud);type(date)"`
 	Necesidad      *Necesidad `orm:"column(necesidad);rel(fk)"`
 	Expedida       bool       `orm:"column(expedida)"`
+	JustificacionRechazo       string       `orm:"column(justificacion_rechazo);null"`
 }
 
 func (t *SolicitudDisponibilidad) TableName() string {

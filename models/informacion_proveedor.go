@@ -27,7 +27,7 @@ type InformacionProveedor struct {
 	IdEntidadBancaria       float64            `orm:"column(id_entidad_bancaria)"`
 	FechaRegistro           string             `orm:"column(fecha_registro)"`
 	FechaUltimaModificacion string             `orm:"column(fecha_ultima_modificacion)"`
-	NomProveedor            string             `orm:"column(nom_proveedor);fk"`
+	NomProveedor            string             `orm:"column(nom_proveedor)"`
 }
 
 func (t *InformacionProveedor) TableName() string {

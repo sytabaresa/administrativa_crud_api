@@ -4,53 +4,37 @@ import (
 	"github.com/udistrital/administrativa_crud_api/models"
 	"encoding/json"
 	"errors"
+	"strconv"
 	"strings"
 
 	"github.com/astaxie/beego"
 )
 
-//  ContratoGeneralController operations for ContratoGeneral
-type ContratoGeneralController struct {
+// ComponenteResolucionController oprations for ComponenteResolucion
+type ComponenteResolucionController struct {
 	beego.Controller
 }
 
 // URLMapping ...
-func (c *ContratoGeneralController) URLMapping() {
+func (c *ComponenteResolucionController) URLMapping() {
 	c.Mapping("Post", c.Post)
 	c.Mapping("GetOne", c.GetOne)
 	c.Mapping("GetAll", c.GetAll)
 	c.Mapping("Put", c.Put)
 	c.Mapping("Delete", c.Delete)
-	c.Mapping("InsertarContratos", c.InsertarContratos)
-
-}
-
-func (c *ContratoGeneralController) InsertarContratos() {
-	var v models.ExpedicionResolucion
-	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
-		if err := models.AddContratosVinculcionEspecial(v); err == nil {
-			c.Ctx.Output.SetStatus(201)
-			c.Data["json"] = v
-		} else {
-			c.Data["json"] = err.Error()
-		}
-	} else {
-		c.Data["json"] = err.Error()
-	}
-	c.ServeJSON()
 }
 
 // Post ...
 // @Title Post
-// @Description create ContratoGeneral
-// @Param	body		body 	models.ContratoGeneral	true		"body for ContratoGeneral content"
-// @Success 201 {int} models.ContratoGeneral
+// @Description create ComponenteResolucion
+// @Param	body		body 	models.ComponenteResolucion	true		"body for ComponenteResolucion content"
+// @Success 201 {int} models.ComponenteResolucion
 // @Failure 403 body is empty
 // @router / [post]
-func (c *ContratoGeneralController) Post() {
-	var v models.ContratoGeneral
+func (c *ComponenteResolucionController) Post() {
+	var v models.ComponenteResolucion
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
-		if _, err := models.AddContratoGeneral(&v); err == nil {
+		if _, err := models.AddComponenteResolucion(&v); err == nil {
 			c.Ctx.Output.SetStatus(201)
 			c.Data["json"] = v
 		} else {
@@ -64,14 +48,15 @@ func (c *ContratoGeneralController) Post() {
 
 // GetOne ...
 // @Title Get One
-// @Description get ContratoGeneral by id
+// @Description get ComponenteResolucion by id
 // @Param	id		path 	string	true		"The key for staticblock"
-// @Success 200 {object} models.ContratoGeneral
+// @Success 200 {object} models.ComponenteResolucion
 // @Failure 403 :id is empty
 // @router /:id [get]
-func (c *ContratoGeneralController) GetOne() {
+func (c *ComponenteResolucionController) GetOne() {
 	idStr := c.Ctx.Input.Param(":id")
-	v, err := models.GetContratoGeneralById(idStr)
+	id, _ := strconv.Atoi(idStr)
+	v, err := models.GetComponenteResolucionById(id)
 	if err != nil {
 		c.Data["json"] = err.Error()
 	} else {
@@ -82,17 +67,17 @@ func (c *ContratoGeneralController) GetOne() {
 
 // GetAll ...
 // @Title Get All
-// @Description get ContratoGeneral
+// @Description get ComponenteResolucion
 // @Param	query	query	string	false	"Filter. e.g. col1:v1,col2:v2 ..."
 // @Param	fields	query	string	false	"Fields returned. e.g. col1,col2 ..."
 // @Param	sortby	query	string	false	"Sorted-by fields. e.g. col1,col2 ..."
 // @Param	order	query	string	false	"Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ..."
 // @Param	limit	query	string	false	"Limit the size of result set. Must be an integer"
 // @Param	offset	query	string	false	"Start position of result set. Must be an integer"
-// @Success 200 {object} models.ContratoGeneral
+// @Success 200 {object} models.ComponenteResolucion
 // @Failure 403
 // @router / [get]
-func (c *ContratoGeneralController) GetAll() {
+func (c *ComponenteResolucionController) GetAll() {
 	var fields []string
 	var sortby []string
 	var order []string
@@ -134,7 +119,7 @@ func (c *ContratoGeneralController) GetAll() {
 		}
 	}
 
-	l, err := models.GetAllContratoGeneral(query, fields, sortby, order, offset, limit)
+	l, err := models.GetAllComponenteResolucion(query, fields, sortby, order, offset, limit)
 	if err != nil {
 		c.Data["json"] = err.Error()
 	} else {
@@ -145,17 +130,18 @@ func (c *ContratoGeneralController) GetAll() {
 
 // Put ...
 // @Title Put
-// @Description update the ContratoGeneral
+// @Description update the ComponenteResolucion
 // @Param	id		path 	string	true		"The id you want to update"
-// @Param	body		body 	models.ContratoGeneral	true		"body for ContratoGeneral content"
-// @Success 200 {object} models.ContratoGeneral
+// @Param	body		body 	models.ComponenteResolucion	true		"body for ComponenteResolucion content"
+// @Success 200 {object} models.ComponenteResolucion
 // @Failure 403 :id is not int
 // @router /:id [put]
-func (c *ContratoGeneralController) Put() {
+func (c *ComponenteResolucionController) Put() {
 	idStr := c.Ctx.Input.Param(":id")
-	v := models.ContratoGeneral{Id: idStr}
+	id, _ := strconv.Atoi(idStr)
+	v := models.ComponenteResolucion{Id: id}
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
-		if err := models.UpdateContratoGeneralById(&v); err == nil {
+		if err := models.UpdateComponenteResolucionById(&v); err == nil {
 			c.Data["json"] = "OK"
 		} else {
 			c.Data["json"] = err.Error()
@@ -168,14 +154,15 @@ func (c *ContratoGeneralController) Put() {
 
 // Delete ...
 // @Title Delete
-// @Description delete the ContratoGeneral
+// @Description delete the ComponenteResolucion
 // @Param	id		path 	string	true		"The id you want to delete"
 // @Success 200 {string} delete success!
 // @Failure 403 id is empty
 // @router /:id [delete]
-func (c *ContratoGeneralController) Delete() {
+func (c *ComponenteResolucionController) Delete() {
 	idStr := c.Ctx.Input.Param(":id")
-	if err := models.DeleteContratoGeneral(idStr); err == nil {
+	id, _ := strconv.Atoi(idStr)
+	if err := models.DeleteComponenteResolucion(id); err == nil {
 		c.Data["json"] = "OK"
 	} else {
 		c.Data["json"] = err.Error()

@@ -10,57 +10,52 @@ import (
 	"github.com/astaxie/beego/orm"
 )
 
-type ContratoEstado struct {
-	NumeroContrato string          `orm:"column(numero_contrato);null"`
-	Vigencia       int             `orm:"column(vigencia);null"`
-	FechaRegistro  time.Time       `orm:"column(fecha_registro);type(timestamp without time zone);null"`
-	Id             int             `orm:"column(id);pk;auto"`
-	Estado         *EstadoContrato `orm:"column(estado);rel(fk)"`
-	Usuario        string          `orm:"column(usuario);null"`
+type ResolucionEstado struct {
+	Resolucion    *Resolucion       `orm:"column(resolucion);rel(fk)"`
+	Estado        *EstadoResolucion `orm:"column(estado);rel(fk)"`
+	Usuario       string            `orm:"column(usuario);null"`
+	FechaRegistro time.Time         `orm:"column(fecha_registro);type(date)"`
+	Id            int               `orm:"column(id);pk;auto"`
 }
 
-func (t *ContratoEstado) TableName() string {
-	return "contrato_estado"
+func (t *ResolucionEstado) TableName() string {
+	return "resolucion_estado"
 }
 
 func init() {
-	orm.RegisterModel(new(ContratoEstado))
+	orm.RegisterModel(new(ResolucionEstado))
 }
 
-// AddContratoEstado insert a new ContratoEstado into database and returns
+// AddResolucionEstado insert a new ResolucionEstado into database and returns
 // last inserted Id on success.
-func AddContratoEstado(m *ContratoEstado) (id int64, err error) {
+func AddResolucionEstado(m *ResolucionEstado) (id int64, err error) {
 	o := orm.NewOrm()
 	id, err = o.Insert(m)
 	return
 }
 
-// GetContratoEstadoById retrieves ContratoEstado by Id. Returns error if
+// GetResolucionEstadoById retrieves ResolucionEstado by Id. Returns error if
 // Id doesn't exist
-func GetContratoEstadoById(id int) (v *ContratoEstado, err error) {
+func GetResolucionEstadoById(id int) (v *ResolucionEstado, err error) {
 	o := orm.NewOrm()
-	v = &ContratoEstado{Id: id}
+	v = &ResolucionEstado{Id: id}
 	if err = o.Read(v); err == nil {
 		return v, nil
 	}
 	return nil, err
 }
 
-// GetAllContratoEstado retrieves all ContratoEstado matches certain condition. Returns empty list if
+// GetAllResolucionEstado retrieves all ResolucionEstado matches certain condition. Returns empty list if
 // no records exist
-func GetAllContratoEstado(query map[string]string, fields []string, sortby []string, order []string,
+func GetAllResolucionEstado(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(ContratoEstado))
+	qs := o.QueryTable(new(ResolucionEstado))
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute
 		k = strings.Replace(k, ".", "__", -1)
-		if strings.Contains(k, "isnull") {
-			qs = qs.Filter(k, (v == "true" || v == "1"))
-		} else {
-			qs = qs.Filter(k, v)
-		}
+		qs = qs.Filter(k, v)
 	}
 	// order by:
 	var sortFields []string
@@ -101,7 +96,7 @@ func GetAllContratoEstado(query map[string]string, fields []string, sortby []str
 		}
 	}
 
-	var l []ContratoEstado
+	var l []ResolucionEstado
 	qs = qs.OrderBy(sortFields...)
 	if _, err = qs.Limit(limit, offset).All(&l, fields...); err == nil {
 		if len(fields) == 0 {
@@ -124,11 +119,11 @@ func GetAllContratoEstado(query map[string]string, fields []string, sortby []str
 	return nil, err
 }
 
-// UpdateContratoEstado updates ContratoEstado by Id and returns error if
+// UpdateResolucionEstado updates ResolucionEstado by Id and returns error if
 // the record to be updated doesn't exist
-func UpdateContratoEstadoById(m *ContratoEstado) (err error) {
+func UpdateResolucionEstadoById(m *ResolucionEstado) (err error) {
 	o := orm.NewOrm()
-	v := ContratoEstado{Id: m.Id}
+	v := ResolucionEstado{Id: m.Id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
@@ -139,15 +134,15 @@ func UpdateContratoEstadoById(m *ContratoEstado) (err error) {
 	return
 }
 
-// DeleteContratoEstado deletes ContratoEstado by Id and returns error if
+// DeleteResolucionEstado deletes ResolucionEstado by Id and returns error if
 // the record to be deleted doesn't exist
-func DeleteContratoEstado(id int) (err error) {
+func DeleteResolucionEstado(id int) (err error) {
 	o := orm.NewOrm()
-	v := ContratoEstado{Id: id}
+	v := ResolucionEstado{Id: id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
-		if num, err = o.Delete(&ContratoEstado{Id: id}); err == nil {
+		if num, err = o.Delete(&ResolucionEstado{Id: id}); err == nil {
 			fmt.Println("Number of records deleted in database:", num)
 		}
 	}

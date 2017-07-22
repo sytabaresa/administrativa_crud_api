@@ -5,62 +5,54 @@ import (
 	"fmt"
 	"reflect"
 	"strings"
-	"time"
 
 	"github.com/astaxie/beego/orm"
 )
 
-type ContratoEstado struct {
-	NumeroContrato string          `orm:"column(numero_contrato);null"`
-	Vigencia       int             `orm:"column(vigencia);null"`
-	FechaRegistro  time.Time       `orm:"column(fecha_registro);type(timestamp without time zone);null"`
-	Id             int             `orm:"column(id);pk;auto"`
-	Estado         *EstadoContrato `orm:"column(estado);rel(fk)"`
-	Usuario        string          `orm:"column(usuario);null"`
+type Dedicacion struct {
+	Descripcion      string `orm:"column(descripcion);null"`
+	NombreDedicacion string `orm:"column(nombre_dedicacion)"`
+	Id               int    `orm:"column(id_dedicacion);pk"`
 }
 
-func (t *ContratoEstado) TableName() string {
-	return "contrato_estado"
+func (t *Dedicacion) TableName() string {
+	return "dedicacion"
 }
 
 func init() {
-	orm.RegisterModel(new(ContratoEstado))
+	orm.RegisterModel(new(Dedicacion))
 }
 
-// AddContratoEstado insert a new ContratoEstado into database and returns
+// AddDedicacion insert a new Dedicacion into database and returns
 // last inserted Id on success.
-func AddContratoEstado(m *ContratoEstado) (id int64, err error) {
+func AddDedicacion(m *Dedicacion) (id int64, err error) {
 	o := orm.NewOrm()
 	id, err = o.Insert(m)
 	return
 }
 
-// GetContratoEstadoById retrieves ContratoEstado by Id. Returns error if
+// GetDedicacionById retrieves Dedicacion by Id. Returns error if
 // Id doesn't exist
-func GetContratoEstadoById(id int) (v *ContratoEstado, err error) {
+func GetDedicacionById(id int) (v *Dedicacion, err error) {
 	o := orm.NewOrm()
-	v = &ContratoEstado{Id: id}
+	v = &Dedicacion{Id: id}
 	if err = o.Read(v); err == nil {
 		return v, nil
 	}
 	return nil, err
 }
 
-// GetAllContratoEstado retrieves all ContratoEstado matches certain condition. Returns empty list if
+// GetAllDedicacion retrieves all Dedicacion matches certain condition. Returns empty list if
 // no records exist
-func GetAllContratoEstado(query map[string]string, fields []string, sortby []string, order []string,
+func GetAllDedicacion(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(ContratoEstado))
+	qs := o.QueryTable(new(Dedicacion))
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute
 		k = strings.Replace(k, ".", "__", -1)
-		if strings.Contains(k, "isnull") {
-			qs = qs.Filter(k, (v == "true" || v == "1"))
-		} else {
-			qs = qs.Filter(k, v)
-		}
+		qs = qs.Filter(k, v)
 	}
 	// order by:
 	var sortFields []string
@@ -101,7 +93,7 @@ func GetAllContratoEstado(query map[string]string, fields []string, sortby []str
 		}
 	}
 
-	var l []ContratoEstado
+	var l []Dedicacion
 	qs = qs.OrderBy(sortFields...)
 	if _, err = qs.Limit(limit, offset).All(&l, fields...); err == nil {
 		if len(fields) == 0 {
@@ -124,11 +116,11 @@ func GetAllContratoEstado(query map[string]string, fields []string, sortby []str
 	return nil, err
 }
 
-// UpdateContratoEstado updates ContratoEstado by Id and returns error if
+// UpdateDedicacion updates Dedicacion by Id and returns error if
 // the record to be updated doesn't exist
-func UpdateContratoEstadoById(m *ContratoEstado) (err error) {
+func UpdateDedicacionById(m *Dedicacion) (err error) {
 	o := orm.NewOrm()
-	v := ContratoEstado{Id: m.Id}
+	v := Dedicacion{Id: m.Id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
@@ -139,15 +131,15 @@ func UpdateContratoEstadoById(m *ContratoEstado) (err error) {
 	return
 }
 
-// DeleteContratoEstado deletes ContratoEstado by Id and returns error if
+// DeleteDedicacion deletes Dedicacion by Id and returns error if
 // the record to be deleted doesn't exist
-func DeleteContratoEstado(id int) (err error) {
+func DeleteDedicacion(id int) (err error) {
 	o := orm.NewOrm()
-	v := ContratoEstado{Id: id}
+	v := Dedicacion{Id: id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
-		if num, err = o.Delete(&ContratoEstado{Id: id}); err == nil {
+		if num, err = o.Delete(&Dedicacion{Id: id}); err == nil {
 			fmt.Println("Number of records deleted in database:", num)
 		}
 	}

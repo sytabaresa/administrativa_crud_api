@@ -228,6 +228,68 @@ func init() {
 						&controllers.ServicioNecesidadController{},
 					),
 				),
+
+
+				beego.NSNamespace("/vinculacion_docente",
+					beego.NSInclude(
+						&controllers.VinculacionDocenteController{},
+					),
+				),
+				beego.NSNamespace("/dedicacion",
+					beego.NSInclude(
+						&controllers.DedicacionController{},
+					),
+				),
+				beego.NSNamespace("/resolucion",
+					beego.NSInclude(
+						&controllers.ResolucionController{},
+					),
+				),
+				beego.NSNamespace("/resolucion_vinculacion",
+					beego.NSInclude(
+						&controllers.ResolucionVinculacionController{},
+					),
+				),
+				beego.NSNamespace("/resolucion_vinculacion_docente",
+					beego.NSInclude(
+						&controllers.ResolucionVinculacionDocenteController{},
+					),
+				),
+				beego.NSNamespace("/tipo_resolucion",
+					beego.NSInclude(
+						&controllers.TipoResolucionController{},
+					),
+				),
+				beego.NSNamespace("/precontratado",
+					beego.NSInclude(
+						&controllers.PrecontratadoController{},
+					),
+				),
+				beego.NSNamespace("/persona_escalafon",
+					beego.NSInclude(
+						&controllers.PersonaEscalafonController{},
+					),
+				),
+				beego.NSNamespace("/componente_resolucion",
+					beego.NSInclude(
+						&controllers.ComponenteResolucionController{},
+					),
+				),
+				beego.NSNamespace("/contenido_resolucion",
+					beego.NSInclude(
+						&controllers.ResolucionCompletaController{},
+					),
+				),
+				beego.NSNamespace("/estado_resolucion",
+					beego.NSInclude(
+						&controllers.EstadoResolucionController{},
+					),
+				),
+				beego.NSNamespace("/resolucion_estado",
+					beego.NSInclude(
+						&controllers.ResolucionEstadoController{},
+					),
+				),
 			)
 		beego.AddNamespace(ns)
 }

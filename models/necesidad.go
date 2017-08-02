@@ -12,27 +12,27 @@ import (
 )
 
 type Necesidad struct {
-	Id                     int                     `orm:"column(id);pk;auto"`
-	Numero                 int                     `orm:"column(numero);null"`
-	Vigencia               float64                 `orm:"column(vigencia)"`
-	Objeto                 string                  `orm:"column(objeto)"`
-	FechaSolicitud         time.Time               `orm:"column(fecha_solicitud);type(date)"`
-	Valor                  float64                 `orm:"column(valor)"`
-	Justificacion          string                  `orm:"column(justificacion)"`
-	UnidadEjecutora        int        `orm:"column(unidad_ejecutora)"`
-	DiasDuracion           float64                 `orm:"column(dias_duracion)"`
-	UnicoPago              bool                    `orm:"column(unico_pago)"`
-	AgotarPresupuesto      bool                    `orm:"column(agotar_presupuesto)"`
-	ModalidadSeleccion     *ModalidadSeleccion     `orm:"column(modalidad_seleccion);rel(fk)"`
-	Servicio               *Servicio               `orm:"column(servicio);rel(fk)"`
-	PlanAnualAdquisiciones int                     `orm:"column(plan_anual_adquisiciones)"`
-	EstudioMercado         string                  `orm:"column(estudio_mercado);null"`
-	TipoRubro *TipoRubro `orm:"column(tipo_rubro);rel(fk)"`
-	AnalisisRiesgo         string                  `orm:"column(analisis_riesgo);null"`
-	NumeroElaboracion      int                     `orm:"column(numero_elaboracion)"`
-	OtroSi                 int        `orm:"column(otro_si)"`
-	Estado      *EstadoNecesidad                    `orm:"column(estado);rel(fk)"`
-	FechaModificacion      time.Time                    `orm:"column(fecha_modificacion)"`
+	Id                     int                 `orm:"column(id);pk;auto"`
+	Numero                 int                 `orm:"column(numero);null"`
+	Vigencia               float64             `orm:"column(vigencia)"`
+	Objeto                 string              `orm:"column(objeto)"`
+	FechaSolicitud         time.Time           `orm:"column(fecha_solicitud);type(date)"`
+	Valor                  float64             `orm:"column(valor)"`
+	Justificacion          string              `orm:"column(justificacion)"`
+	UnidadEjecutora        int                 `orm:"column(unidad_ejecutora)"`
+	DiasDuracion           float64             `orm:"column(dias_duracion)"`
+	UnicoPago              bool                `orm:"column(unico_pago)"`
+	AgotarPresupuesto      bool                `orm:"column(agotar_presupuesto)"`
+	ModalidadSeleccion     *ModalidadSeleccion `orm:"column(modalidad_seleccion);rel(fk)"`
+	Servicio               *Servicio           `orm:"column(servicio);rel(fk)"`
+	PlanAnualAdquisiciones int                 `orm:"column(plan_anual_adquisiciones)"`
+	EstudioMercado         string              `orm:"column(estudio_mercado);null"`
+	TipoRubro              *TipoRubro          `orm:"column(tipo_rubro);rel(fk)"`
+	AnalisisRiesgo         string              `orm:"column(analisis_riesgo);null"`
+	NumeroElaboracion      int                 `orm:"column(numero_elaboracion)"`
+	OtroSi                 int                 `orm:"column(otro_si);null"`
+	FechaModificacion      time.Time           `orm:"column(fecha_modificacion);type(date)"`
+	Estado                 *EstadoNecesidad    `orm:"column(estado);rel(fk)"`
 }
 
 func (t *Necesidad) TableName() string {
@@ -73,13 +73,13 @@ func GetAllNecesidad(query map[string]string, fields []string, sortby []string, 
 		// rewrite dot-notation to Object__Attribute
 		k = strings.Replace(k, ".", "__", -1)
 		if strings.Contains(k, "isnull") {
-            qs = qs.Filter(k, (v == "true" || v == "1"))
-        } else if strings.Contains(k, "not_in") {
+			qs = qs.Filter(k, (v == "true" || v == "1"))
+		} else if strings.Contains(k, "not_in") {
             k = strings.Replace(k, "__not_in", "", -1)
             qs = qs.Exclude(k, v)
-        } else {
-            qs = qs.Filter(k, v)
-        }
+		} else {
+			qs = qs.Filter(k, v)
+		}
 	}
 	// order by:
 	var sortFields []string

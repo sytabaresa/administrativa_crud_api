@@ -6,18 +6,24 @@ import (
 	"reflect"
 	"strings"
 	"time"
+
 	"github.com/astaxie/beego/orm"
 )
 
 type SolicitudRp struct {
-	Id                int
-	Vigencia         int                `orm:"column(vigencia)"`
-	FechaSolicitud time.Time `orm:"column(fecha_solicitud);type(date);null"`
-  Cdp int `orm:"column(cdp)"`
-  Expedida bool `orm:"column(expedida)"`
-  NumeroContrato string `orm:"column(numero_contrato)"`
-  VigenciaContrato string `orm:"column(vigencia_contrato)"`
-	Compromiso int `orm:"column(compromiso)"`
+	Id               int
+	Vigencia         int       `orm:"column(vigencia)"`
+	FechaSolicitud   time.Time `orm:"column(fecha_solicitud);type(date);null"`
+	Cdp              int       `orm:"column(cdp)"`
+	Expedida         bool      `orm:"column(expedida)"`
+	NumeroContrato   string    `orm:"column(numero_contrato)"`
+	VigenciaContrato string    `orm:"column(vigencia_contrato)"`
+	Compromiso       int       `orm:"column(compromiso)"`
+	Justificacion    int       `orm:"column(justificacion_rechazo)"`
+}
+
+func (t *SolicitudRp) TableName() string {
+	return "solicitud_rp"
 }
 
 func init() {
@@ -48,12 +54,16 @@ func GetSolicitudRpById(id int) (v *SolicitudRp, err error) {
 func GetAllSolicitudRp(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(SolicitudRp))
+	qs := o.QueryTable(new(SolicitudRp)).RelatedSel(5)
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute
 		k = strings.Replace(k, ".", "__", -1)
-		qs = qs.Filter(k, v)
+		if strings.Contains(k, "isnull") {
+			qs = qs.Filter(k, (v == "true" || v == "1"))
+		} else {
+			qs = qs.Filter(k, v)
+		}
 	}
 	// order by:
 	var sortFields []string

@@ -1,16 +1,16 @@
 package controllers
 
 import (
-	"github.com/udistrital/administrativa_crud_api/models"
 	"encoding/json"
 	"errors"
+	"github.com/udistrital/administrativa_crud_api/models"
 	"strconv"
 	"strings"
 
 	"github.com/astaxie/beego"
 )
 
-// NecesidadRechazadaController oprations for NecesidadRechazada
+// NecesidadRechazadaController operations for NecesidadRechazada
 type NecesidadRechazadaController struct {
 	beego.Controller
 }

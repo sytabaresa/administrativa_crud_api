@@ -11,14 +11,14 @@ import (
 )
 
 type CatalogoElemento struct {
-	Id                     int                     `orm:"column(elemento_id);pk;auto"`
-	ElementoPadre                 int                     `orm:"column(elemento_padre)"`
-	ElementoCodigo               int                 `orm:"column(elemento_codigo)"`
-	ElementoCatalogo                 int                  `orm:"column(elemento_catalogo)"`
-	ElementoNombre         string               `orm:"column(elemento_nombre)"`
-	ElementoFechaCreacion                  time.Time                 `orm:"column(elemento_fecha_creacion);type(date)"`
-	ElementoGrupoc          string                  `orm:"column(elemento_grupoc);null"`
-	ElementoEstado        float64        `orm:"column(elemento_estado);null"`
+	Id                    int       `orm:"column(elemento_id);pk;auto"`
+	ElementoPadre         int       `orm:"column(elemento_padre)"`
+	ElementoCodigo        int       `orm:"column(elemento_codigo)"`
+	ElementoCatalogo      int       `orm:"column(elemento_catalogo)"`
+	ElementoNombre        string    `orm:"column(elemento_nombre)"`
+	ElementoFechaCreacion time.Time `orm:"column(elemento_fecha_creacion);type(date)"`
+	ElementoGrupoc        string    `orm:"column(elemento_grupoc);null"`
+	ElementoEstado        float64   `orm:"column(elemento_estado);null"`
 }
 
 func (t *CatalogoElemento) TableName() string {
@@ -55,10 +55,14 @@ func GetAllCatalogoElemento(query map[string]string, fields []string, sortby []s
 	o := orm.NewOrm()
 	qs := o.QueryTable(new(CatalogoElemento)).RelatedSel(5)
 	// query k=v
-  for k, v := range query {
+	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute
 		k = strings.Replace(k, ".", "__", -1)
-		qs = qs.Filter(k, v)
+		if strings.Contains(k, "isnull") {
+			qs = qs.Filter(k, (v == "true" || v == "1"))
+		} else {
+			qs = qs.Filter(k, v)
+		}
 	}
 	// order by:
 	var sortFields []string

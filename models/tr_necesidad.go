@@ -2,9 +2,10 @@ package models
 
 import (
 	"fmt"
-	"github.com/astaxie/beego/orm"
 	"strconv"
 	"time"
+
+	"github.com/astaxie/beego/orm"
 )
 
 type TrNecesidad struct {
@@ -72,9 +73,6 @@ func AddTrNecesidad(m *TrNecesidad) (alerta []string, err error) {
 			return
 		}
 
-
-
-
 		m.DependenciaNecesidad.Necesidad = &Necesidad{Id: int(id)}
 		if _, err = o.Insert(m.DependenciaNecesidad); err != nil {
 			o.Rollback()
@@ -82,31 +80,31 @@ func AddTrNecesidad(m *TrNecesidad) (alerta []string, err error) {
 			alerta = append(alerta, "Error: ¡Ocurrió un error al insertar los datos de las dependencias y responsables!")
 			return
 		}
-		if m.Necesidad.Servicio.Id==1{
+		if m.Necesidad.Servicio.Id == 1 {
 
-					for _, ve := range m.Especificacion {
-						ve.EspecificacionTecnica.SolicitudNecesidad = &Necesidad{Id: int(id)}
+			for _, ve := range m.Especificacion {
+				ve.EspecificacionTecnica.SolicitudNecesidad = &Necesidad{Id: int(id)}
+				//---
+				if _, err = o.Insert(ve.EspecificacionTecnica); err != nil {
+					o.Rollback()
+					alerta[0] = "error"
+					alerta = append(alerta, "Error: ¡Ocurrió un error al insertar las especificaciones técnicas!")
+					return
+				} else {
+					for _, vr := range ve.RequisitoMinimo {
+						vr.EspecificacionTecnica = ve.EspecificacionTecnica
 						//---
-						if _, err = o.Insert(ve.EspecificacionTecnica); err != nil {
+						if _, err = o.Insert(vr); err != nil {
 							o.Rollback()
 							alerta[0] = "error"
-							alerta = append(alerta, "Error: ¡Ocurrió un error al insertar las especificaciones técnicas!")
+							alerta = append(alerta, "Error: ¡Ocurrió un error al insertar los requisitos mínimos!")
 							return
-						} else {
-							for _, vr := range ve.RequisitoMinimo {
-								vr.EspecificacionTecnica = ve.EspecificacionTecnica
-								//---
-								if _, err = o.Insert(vr); err != nil {
-									o.Rollback()
-									alerta[0] = "error"
-									alerta = append(alerta, "Error: ¡Ocurrió un error al insertar los requisitos mínimos!")
-									return
-								}
-							}
 						}
 					}
+				}
+			}
 		}
-		if m.Necesidad.Servicio.Id==2{
+		if m.Necesidad.Servicio.Id == 2 {
 			for _, va := range m.ActividadEconomicaNecesidad {
 				va.SolicitudNecesidad = &Necesidad{Id: int(id)}
 				//---

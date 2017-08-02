@@ -1,22 +1,22 @@
 package controllers
 
 import (
-	"github.com/udistrital/administrativa_crud_api/models"
 	"encoding/json"
 	"errors"
+	"github.com/udistrital/administrativa_crud_api/models"
 	"strconv"
 	"strings"
 	"fmt"
 	"github.com/astaxie/beego"
 )
 
-//  Disponibilidad_apropiacion_solicitud_rpController operations for Disponibilidad_apropiacion_solicitud_rp
-type Disponibilidad_apropiacion_solicitud_rpController struct {
+// DisponibilidadApropiacionSolicitudRpController operations for DisponibilidadApropiacionSolicitudRp
+type DisponibilidadApropiacionSolicitudRpController struct {
 	beego.Controller
 }
 
 // URLMapping ...
-func (c *Disponibilidad_apropiacion_solicitud_rpController) URLMapping() {
+func (c *DisponibilidadApropiacionSolicitudRpController) URLMapping() {
 	c.Mapping("Post", c.Post)
 	c.Mapping("GetOne", c.GetOne)
 	c.Mapping("GetAll", c.GetAll)
@@ -26,25 +26,24 @@ func (c *Disponibilidad_apropiacion_solicitud_rpController) URLMapping() {
 
 // Post ...
 // @Title Post
-// @Description create Disponibilidad_apropiacion_solicitud_rp
-// @Param	body		body 	models.Disponibilidad_apropiacion_solicitud_rp	true		"body for Disponibilidad_apropiacion_solicitud_rp content"
-// @Success 201 {int} models.Disponibilidad_apropiacion_solicitud_rp
+// @Description create DisponibilidadApropiacionSolicitudRp
+// @Param	body		body 	models.DisponibilidadApropiacionSolicitudRp	true		"body for DisponibilidadApropiacionSolicitudRp content"
+// @Success 201 {int} models.DisponibilidadApropiacionSolicitudRp
 // @Failure 403 body is empty
 // @router / [post]
-func (c *Disponibilidad_apropiacion_solicitud_rpController) Post() {
-	var v models.Disponibilidad_apropiacion_solicitud_rp
-	if errr := json.Unmarshal(c.Ctx.Input.RequestBody, &v); errr == nil{
+func (c *DisponibilidadApropiacionSolicitudRpController) Post() {
+	var v models.DisponibilidadApropiacionSolicitudRp
+	if errr := json.Unmarshal(c.Ctx.Input.RequestBody, &v); errr == nil {
 		fmt.Println(v)
 		fmt.Println("vaaaaa")
-		if _, err := models.AddDisponibilidad_apropiacion_solicitud_rp(&v); err == nil {
-
+		if _, err := models.AddDisponibilidadApropiacionSolicitudRp(&v); err == nil {
 			c.Ctx.Output.SetStatus(201)
 			c.Data["json"] = v
 		} else {
 			c.Data["json"] = err.Error()
 			fmt.Println(err)
 		}
-	}else{
+	} else {
 		c.Data["json"] = errr.Error()
 		fmt.Println(errr)
 	}
@@ -53,15 +52,15 @@ func (c *Disponibilidad_apropiacion_solicitud_rpController) Post() {
 
 // GetOne ...
 // @Title Get One
-// @Description get Disponibilidad_apropiacion_solicitud_rp by id
+// @Description get DisponibilidadApropiacionSolicitudRp by id
 // @Param	id		path 	string	true		"The key for staticblock"
-// @Success 200 {object} models.Disponibilidad_apropiacion_solicitud_rp
+// @Success 200 {object} models.DisponibilidadApropiacionSolicitudRp
 // @Failure 403 :id is empty
 // @router /:id [get]
-func (c *Disponibilidad_apropiacion_solicitud_rpController) GetOne() {
+func (c *DisponibilidadApropiacionSolicitudRpController) GetOne() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
-	v, err := models.GetDisponibilidad_apropiacion_solicitud_rpById(id)
+	v, err := models.GetDisponibilidadApropiacionSolicitudRpById(id)
 	if err != nil {
 		c.Data["json"] = err.Error()
 	} else {
@@ -72,17 +71,17 @@ func (c *Disponibilidad_apropiacion_solicitud_rpController) GetOne() {
 
 // GetAll ...
 // @Title Get All
-// @Description get Disponibilidad_apropiacion_solicitud_rp
+// @Description get DisponibilidadApropiacionSolicitudRp
 // @Param	query	query	string	false	"Filter. e.g. col1:v1,col2:v2 ..."
 // @Param	fields	query	string	false	"Fields returned. e.g. col1,col2 ..."
 // @Param	sortby	query	string	false	"Sorted-by fields. e.g. col1,col2 ..."
 // @Param	order	query	string	false	"Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ..."
 // @Param	limit	query	string	false	"Limit the size of result set. Must be an integer"
 // @Param	offset	query	string	false	"Start position of result set. Must be an integer"
-// @Success 200 {object} models.Disponibilidad_apropiacion_solicitud_rp
+// @Success 200 {object} models.DisponibilidadApropiacionSolicitudRp
 // @Failure 403
 // @router / [get]
-func (c *Disponibilidad_apropiacion_solicitud_rpController) GetAll() {
+func (c *DisponibilidadApropiacionSolicitudRpController) GetAll() {
 	var fields []string
 	var sortby []string
 	var order []string
@@ -124,7 +123,7 @@ func (c *Disponibilidad_apropiacion_solicitud_rpController) GetAll() {
 		}
 	}
 
-	l, err := models.GetAllDisponibilidad_apropiacion_solicitud_rp(query, fields, sortby, order, offset, limit)
+	l, err := models.GetAllDisponibilidadApropiacionSolicitudRp(query, fields, sortby, order, offset, limit)
 	if err != nil {
 		c.Data["json"] = err.Error()
 	} else {
@@ -135,19 +134,22 @@ func (c *Disponibilidad_apropiacion_solicitud_rpController) GetAll() {
 
 // Put ...
 // @Title Put
-// @Description update the Disponibilidad_apropiacion_solicitud_rp
+// @Description update the DisponibilidadApropiacionSolicitudRp
 // @Param	id		path 	string	true		"The id you want to update"
-// @Param	body		body 	models.Disponibilidad_apropiacion_solicitud_rp	true		"body for Disponibilidad_apropiacion_solicitud_rp content"
-// @Success 200 {object} models.Disponibilidad_apropiacion_solicitud_rp
+// @Param	body		body 	models.DisponibilidadApropiacionSolicitudRp	true		"body for DisponibilidadApropiacionSolicitudRp content"
+// @Success 200 {object} models.DisponibilidadApropiacionSolicitudRp
 // @Failure 403 :id is not int
 // @router /:id [put]
-func (c *Disponibilidad_apropiacion_solicitud_rpController) Put() {
+func (c *DisponibilidadApropiacionSolicitudRpController) Put() {
 	idStr := c.Ctx.Input.Param(":id")
-		id, _ := strconv.Atoi(idStr)
-	v := models.Disponibilidad_apropiacion_solicitud_rp{Id: id}
-	json.Unmarshal(c.Ctx.Input.RequestBody, &v)
-	if err := models.UpdateDisponibilidad_apropiacion_solicitud_rpById(&v); err == nil {
-		c.Data["json"] = "OK"
+	id, _ := strconv.Atoi(idStr)
+	v := models.DisponibilidadApropiacionSolicitudRp{Id: id}
+	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
+		if err := models.UpdateDisponibilidadApropiacionSolicitudRpById(&v); err == nil {
+			c.Data["json"] = "OK"
+		} else {
+			c.Data["json"] = err.Error()
+		}
 	} else {
 		c.Data["json"] = err.Error()
 	}
@@ -156,15 +158,15 @@ func (c *Disponibilidad_apropiacion_solicitud_rpController) Put() {
 
 // Delete ...
 // @Title Delete
-// @Description delete the Disponibilidad_apropiacion_solicitud_rp
+// @Description delete the DisponibilidadApropiacionSolicitudRp
 // @Param	id		path 	string	true		"The id you want to delete"
 // @Success 200 {string} delete success!
 // @Failure 403 id is empty
 // @router /:id [delete]
-func (c *Disponibilidad_apropiacion_solicitud_rpController) Delete() {
+func (c *DisponibilidadApropiacionSolicitudRpController) Delete() {
 	idStr := c.Ctx.Input.Param(":id")
-		id, _ := strconv.Atoi(idStr)
-	if err := models.DeleteDisponibilidad_apropiacion_solicitud_rp(id); err == nil {
+	id, _ := strconv.Atoi(idStr)
+	if err := models.DeleteDisponibilidadApropiacionSolicitudRp(id); err == nil {
 		c.Data["json"] = "OK"
 	} else {
 		c.Data["json"] = err.Error()

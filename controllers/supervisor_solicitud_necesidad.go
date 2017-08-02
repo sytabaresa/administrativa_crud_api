@@ -1,16 +1,16 @@
 package controllers
 
 import (
-	"github.com/udistrital/administrativa_crud_api/models"
 	"encoding/json"
 	"errors"
+	"github.com/udistrital/administrativa_crud_api/models"
 	"strconv"
 	"strings"
 
 	"github.com/astaxie/beego"
 )
 
-// SupervisorSolicitudNecesidadController oprations for SupervisorSolicitudNecesidad
+// SupervisorSolicitudNecesidadController operations for SupervisorSolicitudNecesidad
 type SupervisorSolicitudNecesidadController struct {
 	beego.Controller
 }

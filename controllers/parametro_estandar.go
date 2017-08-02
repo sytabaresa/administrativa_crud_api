@@ -1,16 +1,16 @@
 package controllers
 
 import (
-	"github.com/udistrital/administrativa_crud_api/models"
 	"encoding/json"
 	"errors"
+	"github.com/udistrital/administrativa_crud_api/models"
 	"strconv"
 	"strings"
 
 	"github.com/astaxie/beego"
 )
 
-//  ParametroEstandarController operations for ParametroEstandar
+// ParametroEstandarController operations for ParametroEstandar
 type ParametroEstandarController struct {
 	beego.Controller
 }
@@ -33,10 +33,13 @@ func (c *ParametroEstandarController) URLMapping() {
 // @router / [post]
 func (c *ParametroEstandarController) Post() {
 	var v models.ParametroEstandar
-	json.Unmarshal(c.Ctx.Input.RequestBody, &v)
-	if _, err := models.AddParametroEstandar(&v); err == nil {
-		c.Ctx.Output.SetStatus(201)
-		c.Data["json"] = v
+	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
+		if _, err := models.AddParametroEstandar(&v); err == nil {
+			c.Ctx.Output.SetStatus(201)
+			c.Data["json"] = v
+		} else {
+			c.Data["json"] = err.Error()
+		}
 	} else {
 		c.Data["json"] = err.Error()
 	}
@@ -137,9 +140,12 @@ func (c *ParametroEstandarController) Put() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
 	v := models.ParametroEstandar{Id: id}
-	json.Unmarshal(c.Ctx.Input.RequestBody, &v)
-	if err := models.UpdateParametroEstandarById(&v); err == nil {
-		c.Data["json"] = "OK"
+	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
+		if err := models.UpdateParametroEstandarById(&v); err == nil {
+			c.Data["json"] = "OK"
+		} else {
+			c.Data["json"] = err.Error()
+		}
 	} else {
 		c.Data["json"] = err.Error()
 	}

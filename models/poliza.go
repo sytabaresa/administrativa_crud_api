@@ -11,7 +11,7 @@ import (
 )
 
 type Poliza struct {
-	Id                 int       `orm:"column(id_poliza);pk"`
+	Id                 int       `orm:"column(id_poliza);pk;auto"`
 	DescripcionPoliza  string    `orm:"column(descripcion_poliza)"`
 	FechaRegistro      time.Time `orm:"column(fecha_registro);type(date)"`
 	Usuario            string    `orm:"column(usuario)"`
@@ -57,7 +57,7 @@ func GetPolizaById(id int) (v *Poliza, err error) {
 func GetAllPoliza(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(Poliza))
+	qs := o.QueryTable(new(Poliza)).RelatedSel(5)
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute

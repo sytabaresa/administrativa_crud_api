@@ -10,14 +10,14 @@ import (
 )
 
 type EspecificacionTecnica struct {
-	Id            int              `orm:"column(id);pk;auto"`
-	Catalogo         int        `orm:"column(catalogo)"`
-	SolicitudNecesidad *Necesidad       `orm:"column(solicitud_necesidad);rel(fk)"`
-	Elemento     string       `orm:"column(elemento)"`
-	Cantidad        int `orm:"column(cantidad)"`
-	Unidad   int              `orm:"column(unidad)"`
-  Valor   int              `orm:"column(valor)"`
-  Iva   int              `orm:"column(iva)"`
+	Id                 int        `orm:"column(id);pk;auto"`
+	Catalogo           int        `orm:"column(catalogo)"`
+	SolicitudNecesidad *Necesidad `orm:"column(solicitud_necesidad);rel(fk)"`
+	Elemento           string     `orm:"column(elemento);null"`
+	Unidad             int        `orm:"column(unidad)"`
+	Iva                int        `orm:"column(iva)"`
+	Valor              int        `orm:"column(valor)"`
+	Cantidad           int        `orm:"column(cantidad)"`
 }
 
 func (t *EspecificacionTecnica) TableName() string {
@@ -57,7 +57,11 @@ func GetAllEspecificacionTecnica(query map[string]string, fields []string, sortb
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute
 		k = strings.Replace(k, ".", "__", -1)
-		qs = qs.Filter(k, v)
+		if strings.Contains(k, "isnull") {
+			qs = qs.Filter(k, (v == "true" || v == "1"))
+		} else {
+			qs = qs.Filter(k, v)
+		}
 	}
 	// order by:
 	var sortFields []string

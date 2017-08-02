@@ -10,11 +10,11 @@ import (
 )
 
 type FuenteFinanciacionRubroNecesidad struct {
-	Id                 int                 `orm:"column(id);pk;auto"`
-	FuenteFinanciacion int `orm:"column(fuente_financiacion);null"`
+	Id                 int        `orm:"column(id);pk;auto"`
+	FuenteFinanciacion int        `orm:"column(fuente_financiacion);null"`
 	Apropiacion        int        `orm:"column(apropiacion)"`
-	MontoParcial       float64             `orm:"column(monto_parcial)"`
-	SolicitudNecesidad *Necesidad          `orm:"column(solicitud_necesidad);rel(fk)"`
+	MontoParcial       float64    `orm:"column(monto_parcial)"`
+	SolicitudNecesidad *Necesidad `orm:"column(solicitud_necesidad);rel(fk)"`
 }
 
 func (t *FuenteFinanciacionRubroNecesidad) TableName() string {
@@ -54,7 +54,11 @@ func GetAllFuenteFinanciacionRubroNecesidad(query map[string]string, fields []st
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute
 		k = strings.Replace(k, ".", "__", -1)
-		qs = qs.Filter(k, v)
+		if strings.Contains(k, "isnull") {
+			qs = qs.Filter(k, (v == "true" || v == "1"))
+		} else {
+			qs = qs.Filter(k, v)
+		}
 	}
 	// order by:
 	var sortFields []string

@@ -12,13 +12,13 @@ import (
 )
 
 type SolicitudDisponibilidad struct {
-	Id             int        `orm:"column(id);pk;auto"`
-	Numero         int        `orm:"column(numero)"`
-	Vigencia       float64    `orm:"column(vigencia)"`
-	FechaSolicitud time.Time  `orm:"column(fecha_solicitud);type(date)"`
-	Necesidad      *Necesidad `orm:"column(necesidad);rel(fk)"`
-	Expedida       bool       `orm:"column(expedida)"`
-	JustificacionRechazo       string       `orm:"column(justificacion_rechazo);null"`
+	Id                   int        `orm:"column(id);pk;auto"`
+	Numero               int        `orm:"column(numero)"`
+	Vigencia             float64    `orm:"column(vigencia)"`
+	FechaSolicitud       time.Time  `orm:"column(fecha_solicitud);type(date)"`
+	Necesidad            *Necesidad `orm:"column(necesidad);rel(fk)"`
+	Expedida             bool       `orm:"column(expedida)"`
+	JustificacionRechazo string     `orm:"column(justificacion_rechazo);null"`
 }
 
 func (t *SolicitudDisponibilidad) TableName() string {
@@ -81,7 +81,11 @@ func GetAllSolicitudDisponibilidad(query map[string]string, fields []string, sor
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute
 		k = strings.Replace(k, ".", "__", -1)
-		qs = qs.Filter(k, v)
+		if strings.Contains(k, "isnull") {
+			qs = qs.Filter(k, (v == "true" || v == "1"))
+		} else {
+			qs = qs.Filter(k, v)
+		}
 	}
 	// order by:
 	var sortFields []string

@@ -1,16 +1,17 @@
 package controllers
 
 import (
-	"github.com/udistrital/administrativa_crud_api/models"
 	"encoding/json"
 	"errors"
 	"strconv"
 	"strings"
-	"fmt"
+
+	"github.com/udistrital/administrativa_crud_api/models"
+
 	"github.com/astaxie/beego"
 )
 
-//  SolicitudRpController operations for SolicitudRp
+// SolicitudRpController operations for SolicitudRp
 type SolicitudRpController struct {
 	beego.Controller
 }
@@ -33,13 +34,15 @@ func (c *SolicitudRpController) URLMapping() {
 // @router / [post]
 func (c *SolicitudRpController) Post() {
 	var v models.SolicitudRp
-	json.Unmarshal(c.Ctx.Input.RequestBody, &v)
-	if _, err := models.AddSolicitudRp(&v); err == nil {
-		c.Ctx.Output.SetStatus(201)
-		c.Data["json"] = v
+	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
+		if alerta, err := models.AddSolicitudRp(&v); err == nil {
+			c.Ctx.Output.SetStatus(201)
+			c.Data["json"] = alerta
+		} else {
+			c.Data["json"] = alerta
+		}
 	} else {
 		c.Data["json"] = err.Error()
-		fmt.Println(err)
 	}
 	c.ServeJSON()
 }
@@ -53,7 +56,7 @@ func (c *SolicitudRpController) Post() {
 // @router /:id [get]
 func (c *SolicitudRpController) GetOne() {
 	idStr := c.Ctx.Input.Param(":id")
-	id, err := strconv.Atoi(idStr)
+	id, _ := strconv.Atoi(idStr)
 	v, err := models.GetSolicitudRpById(id)
 	if err != nil {
 		c.Data["json"] = err.Error()
@@ -138,9 +141,12 @@ func (c *SolicitudRpController) Put() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
 	v := models.SolicitudRp{Id: id}
-	json.Unmarshal(c.Ctx.Input.RequestBody, &v)
-	if err := models.UpdateSolicitudRpById(&v); err == nil {
-		c.Data["json"] = "OK"
+	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
+		if err := models.UpdateSolicitudRpById(&v); err == nil {
+			c.Data["json"] = "OK"
+		} else {
+			c.Data["json"] = err.Error()
+		}
 	} else {
 		c.Data["json"] = err.Error()
 	}

@@ -11,11 +11,11 @@ import (
 )
 
 type SupervisorSolicitudNecesidad struct {
-	Id                 int                        `orm:"column(id);pk;auto"`
-	SolicitudNecesidad *Necesidad                 `orm:"column(solicitud_necesidad);rel(fk)"`
-	Funcionario        int `orm:"column(funcionario)"`
-	FechaAsginacion    time.Time                  `orm:"column(fecha_asginacion);type(date)"`
-	Estado             string                     `orm:"column(estado)"`
+	Id                 int        `orm:"column(id);pk"`
+	SolicitudNecesidad *Necesidad `orm:"column(solicitud_necesidad);rel(fk)"`
+	Funcionario        int        `orm:"column(funcionario)"`
+	FechaAsginacion    time.Time  `orm:"column(fecha_asginacion);type(date)"`
+	Estado             string     `orm:"column(estado)"`
 }
 
 func (t *SupervisorSolicitudNecesidad) TableName() string {
@@ -55,7 +55,11 @@ func GetAllSupervisorSolicitudNecesidad(query map[string]string, fields []string
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute
 		k = strings.Replace(k, ".", "__", -1)
-		qs = qs.Filter(k, v)
+		if strings.Contains(k, "isnull") {
+			qs = qs.Filter(k, (v == "true" || v == "1"))
+		} else {
+			qs = qs.Filter(k, v)
+		}
 	}
 	// order by:
 	var sortFields []string

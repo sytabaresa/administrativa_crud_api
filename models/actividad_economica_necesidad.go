@@ -10,9 +10,9 @@ import (
 )
 
 type ActividadEconomicaNecesidad struct {
-	Id                 int           `orm:"column(id);pk;auto"`
-	SolicitudNecesidad *Necesidad    `orm:"column(solicitud_necesidad);rel(fk)"`
-	ActividadEconomica string `orm:"column(actividad_economica)"`
+	Id                 int        `orm:"column(id);pk;auto"`
+	SolicitudNecesidad *Necesidad `orm:"column(solicitud_necesidad);rel(fk)"`
+	ActividadEconomica string     `orm:"column(actividad_economica)"`
 }
 
 func (t *ActividadEconomicaNecesidad) TableName() string {
@@ -52,7 +52,11 @@ func GetAllActividadEconomicaNecesidad(query map[string]string, fields []string,
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute
 		k = strings.Replace(k, ".", "__", -1)
-		qs = qs.Filter(k, v)
+		if strings.Contains(k, "isnull") {
+			qs = qs.Filter(k, (v == "true" || v == "1"))
+		} else {
+			qs = qs.Filter(k, v)
+		}
 	}
 	// order by:
 	var sortFields []string

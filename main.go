@@ -15,10 +15,11 @@ func init() {
 
 func main() {
 	orm.Debug = true
-
+	
 	if beego.BConfig.RunMode == "dev" {
-	        beego.BConfig.WebConfig.DirectoryIndex = true
-				}
+		beego.BConfig.WebConfig.DirectoryIndex = true
+		beego.BConfig.WebConfig.StaticDir["/swagger"] = "swagger"
+	}
 
 	beego.InsertFilter("*", beego.BeforeRouter, cors.Allow(&cors.Options{
 		AllowOrigins: []string{"*"},

@@ -7,7 +7,7 @@ import (
 )
 
 type PersonaEscalafon struct {
-	Id              int    `orm:"column(id);pk"`
+	Id              int    `orm:"column(id);pk;auto"`
 	PrimerNombre    string `orm:"column(primer_nombre)"`
 	SegundoNombre   string `orm:"column(segundo_nombre)"`
 	PrimerApellido  string `orm:"column(primer_apellido)"`

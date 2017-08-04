@@ -11,7 +11,7 @@ import (
 )
 
 type SupervisorSolicitudNecesidad struct {
-	Id                 int        `orm:"column(id);pk"`
+	Id                 int        `orm:"column(id);pk;auto"`
 	SolicitudNecesidad *Necesidad `orm:"column(solicitud_necesidad);rel(fk)"`
 	Funcionario        int        `orm:"column(funcionario)"`
 	FechaAsginacion    time.Time  `orm:"column(fecha_asginacion);type(date)"`

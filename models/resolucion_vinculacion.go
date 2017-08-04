@@ -8,7 +8,7 @@ import (
 )
 
 type ResolucionVinculacion struct {
-	Id              int       `orm:"column(id);pk"`
+	Id              int       `orm:"column(id);pk;auto"`
 	Estado          string    `orm:"column(estado)"`
 	Numero          string    `orm:"column(numero)"`
 	Vigencia        int       `orm:"column(vigencia)"`

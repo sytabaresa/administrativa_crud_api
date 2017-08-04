@@ -12,7 +12,7 @@ import (
 )
 
 type ContratoGeneral struct {
-	Id                           string           		`orm:"column(numero_contrato);pk"`
+	Id                           string           		`orm:"column(numero_contrato);pk;auto"`
 	VigenciaContrato             int              		`orm:"column(vigencia)"`
 	ObjetoContrato               string           		`orm:"column(objeto_contrato);null"`
 	PlazoEjecucion               int              		`orm:"column(plazo_ejecucion)"`

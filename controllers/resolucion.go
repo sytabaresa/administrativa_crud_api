@@ -1,9 +1,9 @@
 package controllers
 
 import (
+	"administrativa_crud_api/models"
 	"encoding/json"
 	"errors"
-	"github.com/udistrital/administrativa_crud_api/models"
 	"strconv"
 	"strings"
 	//"fmt"
@@ -11,7 +11,7 @@ import (
 	"github.com/astaxie/beego"
 )
 
-// ResolucionController operations for Resolucion
+// ResolucionController oprations for Resolucion
 type ResolucionController struct {
 	beego.Controller
 }
@@ -28,6 +28,13 @@ func (c *ResolucionController) URLMapping() {
 	c.Mapping("GenerarResolucion", c.GenerarResolucion)
 }
 
+// Put ...
+// @Title Cancelar
+// @Description update the Resolucion
+// @Param	id		path 	string	true		"The id you want to update"
+// @Success 200 {object} models.Resolucion
+// @Failure 403 :id is not int
+// @router /:id [put]
 func (c *ResolucionController) CancelarResolucion() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
@@ -44,6 +51,13 @@ func (c *ResolucionController) CancelarResolucion() {
 	c.ServeJSON()
 }
 
+// Put ...
+// @Title Restaurar
+// @Description update the Resolucion
+// @Param	id		path 	string	true		"The id you want to update"
+// @Success 200 {object} models.Resolucion
+// @Failure 403 :id is not int
+// @router /:id [put]
 func (c *ResolucionController) RestaurarResolucion() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
@@ -60,6 +74,12 @@ func (c *ResolucionController) RestaurarResolucion() {
 	c.ServeJSON()
 }
 
+// Post ...
+// @Title Post
+// @Description create Resolucion
+// @Success 201 {int} models.Resolucion
+// @Failure 403 body is empty
+// @router / [post]
 func (c *ResolucionController) GenerarResolucion() {
 	var v models.Resolucion
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {

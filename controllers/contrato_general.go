@@ -1,15 +1,15 @@
 package controllers
 
 import (
+	"administrativa_crud_api/models"
 	"encoding/json"
 	"errors"
-	"github.com/udistrital/administrativa_crud_api/models"
 	"strings"
 
 	"github.com/astaxie/beego"
 )
 
-// ContratoGeneralController operations for ContratoGeneral
+//  ContratoGeneralController operations for ContratoGeneral
 type ContratoGeneralController struct {
 	beego.Controller
 }
@@ -22,8 +22,15 @@ func (c *ContratoGeneralController) URLMapping() {
 	c.Mapping("Put", c.Put)
 	c.Mapping("Delete", c.Delete)
 	c.Mapping("InsertarContratos", c.InsertarContratos)
+
 }
 
+// Post ...
+// @Title Post Contratos
+// @Description create ContratoGenerales
+// @Success 201 {int} models.ContratoGeneral
+// @Failure 403 body is empty
+// @router / [post]
 func (c *ContratoGeneralController) InsertarContratos() {
 	var v models.ExpedicionResolucion
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {

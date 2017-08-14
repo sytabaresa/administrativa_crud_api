@@ -3,14 +3,15 @@ package controllers
 import (
 	"encoding/json"
 	"errors"
-	"github.com/udistrital/administrativa_crud_api/models"
 	"strconv"
 	"strings"
+
+	"github.com/udistrital/administrativa_crud_api/models"
 
 	"github.com/astaxie/beego"
 )
 
-// EstadoResolucionController oprations for EstadoResolucion
+// EstadoResolucionController operations for EstadoResolucion
 type EstadoResolucionController struct {
 	beego.Controller
 }

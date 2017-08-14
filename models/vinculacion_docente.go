@@ -11,19 +11,19 @@ import (
 )
 
 type VinculacionDocente struct {
-	FechaRegistro        time.Time                  `orm:"column(fecha_registro);type(date)"`
-	Estado               bool                       `orm:"column(estado)"`
-	IdProyectoCurricular int16                      `orm:"column(id_proyecto_curricular)"`
-	IdDedicacion         *Dedicacion                `orm:"column(id_dedicacion);rel(fk)"`
-	IdResolucion         *ResolucionVinculacionDocente  `orm:"column(id_resolucion);rel(fk)"`
-	IdSalarioMinimo      int                       `orm:"column(id_salario_minimo);null"`
-	IdPuntoSalarial      int             			`orm:"column(id_punto_salarial);null"`
-	NumeroSemanas        int                        `orm:"column(numero_semanas)"`
-	NumeroHorasSemanales int                        `orm:"column(numero_horas_semanales)"`
-	IdPersona            int 						 `orm:"column(id_persona)"`
-	Vigencia             int                        `orm:"column(vigencia);null"`
-	NumeroContrato       string                     `orm:"column(numero_contrato);null"`
-	Id                   int                        `orm:"column(id);pk;auto"`
+	Id                    int                           `orm:"column(id);pk;auto"`
+	NumeroContrato        string                        `orm:"column(numero_contrato);null"`
+	Vigencia              int                           `orm:"column(vigencia);null"`
+	IdPersona             int                      		`orm:"column(id_persona)"`
+	NumeroHorasSemanales  int                           `orm:"column(numero_horas_semanales)"`
+	NumeroSemanas         int                           `orm:"column(numero_semanas)"`
+	IdPuntoSalarial       int                           `orm:"column(id_punto_salarial);null"`
+	IdSalarioMinimo       int                           `orm:"column(id_salario_minimo);null"`
+	IdResolucion          *ResolucionVinculacionDocente `orm:"column(id_resolucion);rel(fk)"`
+	IdDedicacion          *Dedicacion                   `orm:"column(id_dedicacion);rel(fk)"`
+	IdProyectoCurricular  int16                         `orm:"column(id_proyecto_curricular)"`
+	Estado                bool                          `orm:"column(estado)"`
+	FechaRegistro         time.Time                     `orm:"column(fecha_registro);type(date)"`
 }
 
 func (t *VinculacionDocente) TableName() string {
@@ -81,7 +81,11 @@ func GetAllVinculacionDocente(query map[string]string, fields []string, sortby [
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute
 		k = strings.Replace(k, ".", "__", -1)
-		qs = qs.Filter(k, v)
+		if strings.Contains(k, "isnull") {
+			qs = qs.Filter(k, (v == "true" || v == "1"))
+		} else {
+			qs = qs.Filter(k, v)
+		}
 	}
 	// order by:
 	var sortFields []string

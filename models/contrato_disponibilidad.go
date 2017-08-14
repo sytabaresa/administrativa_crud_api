@@ -5,18 +5,23 @@ import (
 	"fmt"
 	"reflect"
 	"strings"
-"time"
+	"time"
+
 	"github.com/astaxie/beego/orm"
 )
 
 type ContratoDisponibilidad struct {
-	Id             int64 `orm:"column(id)"`
+	Id             int64 `orm:"column(id);pk;auto"`
 	NumeroCdp      int	`orm:"column(numero_cdp)"`
 	NumeroContrato string `orm:"column(numero_contrato)"`
 	FechaRegistro  time.Time `orm:"column(fecha_registro)"`
 	Vigencia       int `orm:"column(vigencia)"`
 	Estado         bool `orm:"column(estado)"`
 	VigenciaCdp    int  `orm:"column(vigencia_cdp)"`
+}
+
+func (t *ContratoDisponibilidad) TableName() string {
+	return "contrato_disponibilidad"
 }
 
 func init() {
@@ -47,12 +52,16 @@ func GetContratoDisponibilidadById(id int64) (v *ContratoDisponibilidad, err err
 func GetAllContratoDisponibilidad(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(ContratoDisponibilidad))
+	qs := o.QueryTable(new(ContratoDisponibilidad)).RelatedSel(5)
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute
 		k = strings.Replace(k, ".", "__", -1)
-		qs = qs.Filter(k, v)
+		if strings.Contains(k, "isnull") {
+			qs = qs.Filter(k, (v == "true" || v == "1"))
+		} else {
+			qs = qs.Filter(k, v)
+		}
 	}
 	// order by:
 	var sortFields []string

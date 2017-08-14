@@ -19,7 +19,7 @@ func (c *VigenciaContratoController) URLMapping() {
 // VigenciaContrato ...
 // @Title VigenciaContrato
 // @Description create VigenciaContrato
-// @Param	body
+// @Param	body		body 	models.VigenciaContrato	true	"body for VigenciaContrato content"
 // @Success 201 {int}
 // @Failure 403 body is empty
 // @router /

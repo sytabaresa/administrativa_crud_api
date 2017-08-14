@@ -9,48 +9,55 @@ import (
 	"github.com/astaxie/beego/orm"
 )
 
-type Disponibilidad_apropiacion_solicitud_rp struct {
-	Id                        int
-	DisponibilidadApropiacion int `orm:"column(disponibilidad_apropiacion)"`
-	SolicitudRp               int `orm:"column(solicitud_rp)"`
-	Monto                     int `orm:"column(monto)"`
+type DisponibilidadApropiacionSolicitudRp struct {
+	Id                        int          	`orm:"column(id);pk;auto"`
+	DisponibilidadApropiacion int          	`orm:"column(disponibilidad_apropiacion)"`
+	SolicitudRp               int			`orm:"column(solicitud_rp)"`
+	Monto                     float64      	`orm:"column(monto)"`
 }
 
+func (t *DisponibilidadApropiacionSolicitudRp) TableName() string {
+	return "disponibilidad_apropiacion_solicitud_rp"
+}
 
 func init() {
-	orm.RegisterModel(new(Disponibilidad_apropiacion_solicitud_rp))
+	orm.RegisterModel(new(DisponibilidadApropiacionSolicitudRp))
 }
 
-// AddDisponibilidad_apropiacion_solicitud_rp insert a new Disponibilidad_apropiacion_solicitud_rp into database and returns
+// AddDisponibilidadApropiacionSolicitudRp insert a new DisponibilidadApropiacionSolicitudRp into database and returns
 // last inserted Id on success.
-func AddDisponibilidad_apropiacion_solicitud_rp(m *Disponibilidad_apropiacion_solicitud_rp) (id int64, err error) {
+func AddDisponibilidadApropiacionSolicitudRp(m *DisponibilidadApropiacionSolicitudRp) (id int64, err error) {
 	o := orm.NewOrm()
 	id, err = o.Insert(m)
 	return
 }
 
-// GetDisponibilidad_apropiacion_solicitud_rpById retrieves Disponibilidad_apropiacion_solicitud_rp by Id. Returns error if
+// GetDisponibilidadApropiacionSolicitudRpById retrieves DisponibilidadApropiacionSolicitudRp by Id. Returns error if
 // Id doesn't exist
-func GetDisponibilidad_apropiacion_solicitud_rpById(id int) (v *Disponibilidad_apropiacion_solicitud_rp, err error) {
+func GetDisponibilidadApropiacionSolicitudRpById(id int) (v *DisponibilidadApropiacionSolicitudRp, err error) {
 	o := orm.NewOrm()
-	v = &Disponibilidad_apropiacion_solicitud_rp{Id: id}
+	v = &DisponibilidadApropiacionSolicitudRp{Id: id}
 	if err = o.Read(v); err == nil {
 		return v, nil
 	}
 	return nil, err
 }
 
-// GetAllDisponibilidad_apropiacion_solicitud_rp retrieves all Disponibilidad_apropiacion_solicitud_rp matches certain condition. Returns empty list if
+// GetAllDisponibilidadApropiacionSolicitudRp retrieves all DisponibilidadApropiacionSolicitudRp matches certain condition. Returns empty list if
 // no records exist
-func GetAllDisponibilidad_apropiacion_solicitud_rp(query map[string]string, fields []string, sortby []string, order []string,
+func GetAllDisponibilidadApropiacionSolicitudRp(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(Disponibilidad_apropiacion_solicitud_rp))
+	qs := o.QueryTable(new(DisponibilidadApropiacionSolicitudRp)).RelatedSel(5)
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute
 		k = strings.Replace(k, ".", "__", -1)
-		qs = qs.Filter(k, v)
+		if strings.Contains(k, "isnull") {
+			qs = qs.Filter(k, (v == "true" || v == "1"))
+		} else {
+			qs = qs.Filter(k, v)
+		}
 	}
 	// order by:
 	var sortFields []string
@@ -91,7 +98,7 @@ func GetAllDisponibilidad_apropiacion_solicitud_rp(query map[string]string, fiel
 		}
 	}
 
-	var l []Disponibilidad_apropiacion_solicitud_rp
+	var l []DisponibilidadApropiacionSolicitudRp
 	qs = qs.OrderBy(sortFields...)
 	if _, err = qs.Limit(limit, offset).All(&l, fields...); err == nil {
 		if len(fields) == 0 {
@@ -114,11 +121,11 @@ func GetAllDisponibilidad_apropiacion_solicitud_rp(query map[string]string, fiel
 	return nil, err
 }
 
-// UpdateDisponibilidad_apropiacion_solicitud_rp updates Disponibilidad_apropiacion_solicitud_rp by Id and returns error if
+// UpdateDisponibilidadApropiacionSolicitudRp updates DisponibilidadApropiacionSolicitudRp by Id and returns error if
 // the record to be updated doesn't exist
-func UpdateDisponibilidad_apropiacion_solicitud_rpById(m *Disponibilidad_apropiacion_solicitud_rp) (err error) {
+func UpdateDisponibilidadApropiacionSolicitudRpById(m *DisponibilidadApropiacionSolicitudRp) (err error) {
 	o := orm.NewOrm()
-	v := Disponibilidad_apropiacion_solicitud_rp{Id: m.Id}
+	v := DisponibilidadApropiacionSolicitudRp{Id: m.Id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
@@ -129,15 +136,15 @@ func UpdateDisponibilidad_apropiacion_solicitud_rpById(m *Disponibilidad_apropia
 	return
 }
 
-// DeleteDisponibilidad_apropiacion_solicitud_rp deletes Disponibilidad_apropiacion_solicitud_rp by Id and returns error if
+// DeleteDisponibilidadApropiacionSolicitudRp deletes DisponibilidadApropiacionSolicitudRp by Id and returns error if
 // the record to be deleted doesn't exist
-func DeleteDisponibilidad_apropiacion_solicitud_rp(id int) (err error) {
+func DeleteDisponibilidadApropiacionSolicitudRp(id int) (err error) {
 	o := orm.NewOrm()
-	v := Disponibilidad_apropiacion_solicitud_rp{Id: id}
+	v := DisponibilidadApropiacionSolicitudRp{Id: id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
-		if num, err = o.Delete(&Disponibilidad_apropiacion_solicitud_rp{Id: id}); err == nil {
+		if num, err = o.Delete(&DisponibilidadApropiacionSolicitudRp{Id: id}); err == nil {
 			fmt.Println("Number of records deleted in database:", num)
 		}
 	}

@@ -11,9 +11,9 @@ import (
 )
 
 type EstadoResolucion struct {
-	NombreEstado string    `orm:"column(nombre_estado)"`
-	FechaRegitro time.Time `orm:"column(fecha_regitro);type(date)"`
-	Id           int       `orm:"column(id);pk;auto"`
+	NombreEstado  string    `orm:"column(nombre_estado);null"`
+	FechaRegistro time.Time `orm:"column(fecha_registro);type(date);null"`
+	Id            int       `orm:"column(id);pk;auto"`
 }
 
 func (t *EstadoResolucion) TableName() string {
@@ -48,12 +48,16 @@ func GetEstadoResolucionById(id int) (v *EstadoResolucion, err error) {
 func GetAllEstadoResolucion(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(EstadoResolucion))
+	qs := o.QueryTable(new(EstadoResolucion)).RelatedSel(5)
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute
 		k = strings.Replace(k, ".", "__", -1)
-		qs = qs.Filter(k, v)
+		if strings.Contains(k, "isnull") {
+			qs = qs.Filter(k, (v == "true" || v == "1"))
+		} else {
+			qs = qs.Filter(k, v)
+		}
 	}
 	// order by:
 	var sortFields []string

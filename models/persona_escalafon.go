@@ -2,16 +2,17 @@ package models
 
 import (
 	"fmt"
+
 	"github.com/astaxie/beego/orm"
 )
 
 type PersonaEscalafon struct {
-    Id int `orm:"column(id);pk"`
-    PrimerNombre string `orm:"column(primer_nombre)"`
-    SegundoNombre string `orm:"column(segundo_nombre)"`
-    PrimerApellido string `orm:"column(primer_apellido)"`
-    SegundoApellido string `orm:"column(segundo_apellido)"`
-    Escalafon string `orm:"column(escalafon)"`
+	Id              int    `orm:"column(id);pk;auto"`
+	PrimerNombre    string `orm:"column(primer_nombre)"`
+	SegundoNombre   string `orm:"column(segundo_nombre)"`
+	PrimerApellido  string `orm:"column(primer_apellido)"`
+	SegundoApellido string `orm:"column(segundo_apellido)"`
+	Escalafon       string `orm:"column(escalafon)"`
 }
 
 func init() {

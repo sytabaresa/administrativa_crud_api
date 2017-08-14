@@ -1,16 +1,16 @@
 package controllers
 
 import (
-	"github.com/udistrital/administrativa_crud_api/models"
 	"encoding/json"
 	"errors"
+	"github.com/udistrital/administrativa_crud_api/models"
 	"strconv"
 	"strings"
 
 	"github.com/astaxie/beego"
 )
 
-// EspecificacionTecnicaController oprations for EspecificacionTecnica
+// EspecificacionTecnicaController operations for EspecificacionTecnica
 type EspecificacionTecnicaController struct {
 	beego.Controller
 }

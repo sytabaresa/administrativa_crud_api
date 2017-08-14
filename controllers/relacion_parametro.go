@@ -1,16 +1,16 @@
 package controllers
 
 import (
-	"github.com/udistrital/administrativa_crud_api/models"
 	"encoding/json"
 	"errors"
+	"github.com/udistrital/administrativa_crud_api/models"
 	"strconv"
 	"strings"
 
 	"github.com/astaxie/beego"
 )
 
-//  RelacionParametroController operations for RelacionParametro
+// RelacionParametroController operations for RelacionParametro
 type RelacionParametroController struct {
 	beego.Controller
 }
@@ -33,10 +33,13 @@ func (c *RelacionParametroController) URLMapping() {
 // @router / [post]
 func (c *RelacionParametroController) Post() {
 	var v models.RelacionParametro
-	json.Unmarshal(c.Ctx.Input.RequestBody, &v)
-	if _, err := models.AddRelacionParametro(&v); err == nil {
-		c.Ctx.Output.SetStatus(201)
-		c.Data["json"] = v
+	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
+		if _, err := models.AddRelacionParametro(&v); err == nil {
+			c.Ctx.Output.SetStatus(201)
+			c.Data["json"] = v
+		} else {
+			c.Data["json"] = err.Error()
+		}
 	} else {
 		c.Data["json"] = err.Error()
 	}
@@ -137,9 +140,12 @@ func (c *RelacionParametroController) Put() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
 	v := models.RelacionParametro{Id: id}
-	json.Unmarshal(c.Ctx.Input.RequestBody, &v)
-	if err := models.UpdateRelacionParametroById(&v); err == nil {
-		c.Data["json"] = "OK"
+	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
+		if err := models.UpdateRelacionParametroById(&v); err == nil {
+			c.Data["json"] = "OK"
+		} else {
+			c.Data["json"] = err.Error()
+		}
 	} else {
 		c.Data["json"] = err.Error()
 	}

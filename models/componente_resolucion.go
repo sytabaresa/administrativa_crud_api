@@ -10,12 +10,12 @@ import (
 )
 
 type ComponenteResolucion struct {
-	ComponentePadre *ComponenteResolucion `orm:"column(componente_padre);rel(fk);null"`
-	TipoComponente  string                `orm:"column(tipo_componente)"`
-	Texto           string                `orm:"column(texto)"`
-	ResolucionId    *Resolucion           `orm:"column(resolucion_id);rel(fk)"`
-	Numero          int                   `orm:"column(numero)"`
-	Id              int                   `orm:"column(id);pk;auto"`
+	Id              int                           `orm:"column(id);pk;auto"`
+	Numero          int                           `orm:"column(numero)"`
+	ResolucionId    *Resolucion					  `orm:"column(resolucion_id);rel(fk)"`
+	Texto           string                        `orm:"column(texto)"`
+	TipoComponente  string                        `orm:"column(tipo_componente)"`
+	ComponentePadre *ComponenteResolucion         `orm:"column(componente_padre);rel(fk);null"`
 }
 
 func (t *ComponenteResolucion) TableName() string {
@@ -50,12 +50,16 @@ func GetComponenteResolucionById(id int) (v *ComponenteResolucion, err error) {
 func GetAllComponenteResolucion(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(ComponenteResolucion))
+	qs := o.QueryTable(new(ComponenteResolucion)).RelatedSel(5)
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute
 		k = strings.Replace(k, ".", "__", -1)
-		qs = qs.Filter(k, v)
+		if strings.Contains(k, "isnull") {
+			qs = qs.Filter(k, (v == "true" || v == "1"))
+		} else {
+			qs = qs.Filter(k, v)
+		}
 	}
 	// order by:
 	var sortFields []string

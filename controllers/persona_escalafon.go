@@ -14,6 +14,12 @@ func (c *PersonaEscalafonController) URLMapping() {
 
 }
 
+// GetAll ...
+// @Title Get All
+// @Description get PersonaEscalafon
+// @Success 200 {object} models.PersonaEscalafon
+// @Failure 403
+// @router / [get]
 func (c *PersonaEscalafonController) GetAll() {
     listaPersonas := models.GetAllPersonaEscalafon()
     c.Ctx.Output.SetStatus(201)

@@ -19,7 +19,13 @@ func (c *ResolucionCompletaController) URLMapping() {
 	c.Mapping("ResolucionTemplate", c.ResolucionTemplate)
 }
 
-
+// GetOne ...
+// @Title Get Template
+// @Description get ResolucionCompleta by id
+// @Param	idResolucion		path 	string	true		"The key for staticblock"
+// @Success 200 {object} models.ResolucionCompleta
+// @Failure 403
+// @router /ResolucionTemplate [get]
 func (c *ResolucionCompletaController) ResolucionTemplate() {
     resolucion := models.GetTemplateResolucion()
     c.Ctx.Output.SetStatus(201)
@@ -27,8 +33,13 @@ func (c *ResolucionCompletaController) ResolucionTemplate() {
     c.ServeJSON()
 }
 
-
-
+// GetOne ...
+// @Title Get One
+// @Description get ResolucionCompleta by id
+// @Param	idResolucion		path 	string	true		"The key for staticblock"
+// @Success 200 {object} models.ResolucionCompleta
+// @Failure 403 :idResolucion is empty
+// @router /:idResolucion [get]
 func (c *ResolucionCompletaController) GetOne() {
 	idResolucion := c.Ctx.Input.Param(":idResolucion")
     resolucion := models.GetOneResolucionCompleta(idResolucion)
@@ -37,6 +48,13 @@ func (c *ResolucionCompletaController) GetOne() {
     c.ServeJSON()
 }
 
+// Put ...
+// @Title Put
+// @Description update the ResolucionCompleta
+// @Param	idResolucion		path 	string	true		"The id you want to update"
+// @Success 200 {object} models.ResolucionCompleta
+// @Failure 403 :idResolucion is not int
+// @router /:idResolucion [put]
 func (c *ResolucionCompletaController) Put() {
 	idResolucionStr := c.Ctx.Input.Param(":idResolucion")
 	idResolucion, _ := strconv.Atoi(idResolucionStr)

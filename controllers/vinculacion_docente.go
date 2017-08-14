@@ -25,6 +25,12 @@ func (c *VinculacionDocenteController) URLMapping() {
 	c.Mapping("InsertarVinculaciones", c.InsertarVinculaciones)
 }
 
+// Post ...
+// @Title Post
+// @Description create VinculacionDocente
+// @Success 201 {int} models.VinculacionDocente
+// @Failure 403 body is empty
+// @router /InsertarVinculaciones [post]
 func (c *VinculacionDocenteController) InsertarVinculaciones() {
 	var v []models.VinculacionDocente
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {

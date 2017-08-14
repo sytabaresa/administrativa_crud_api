@@ -13,7 +13,7 @@ import (
 type EstadoContrato struct {
 	NombreEstado  string    `orm:"column(nombre_estado);null"`
 	FechaRegistro time.Time `orm:"column(fecha_registro);type(date);null"`
-	Id            int       `orm:"column(id);pk"`
+	Id            int       `orm:"column(id);pk;auto"`
 }
 
 func (t *EstadoContrato) TableName() string {
@@ -48,7 +48,7 @@ func GetEstadoContratoById(id int) (v *EstadoContrato, err error) {
 func GetAllEstadoContrato(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(EstadoContrato))
+	qs := o.QueryTable(new(EstadoContrato)).RelatedSel(5)
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute

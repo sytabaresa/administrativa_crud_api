@@ -1,8 +1,8 @@
 package controllers
 
 import (
-  "github.com/udistrital/administrativa_crud_api/models"
-  "github.com/astaxie/beego"
+	"github.com/astaxie/beego"
+	"github.com/udistrital/administrativa_crud_api/models"
 )
 
 type ResolucionVinculacionController struct {
@@ -14,10 +14,9 @@ func (c *ResolucionVinculacionController) URLMapping() {
 
 }
 
-
 func (c *ResolucionVinculacionController) GetAll() {
-    listaResoluciones := models.GetAllResolucionVinculacion()
-    c.Ctx.Output.SetStatus(201)
-    c.Data["json"] = listaResoluciones
-    c.ServeJSON()
+	listaResoluciones := models.GetAllResolucionVinculacion()
+	c.Ctx.Output.SetStatus(201)
+	c.Data["json"] = listaResoluciones
+	c.ServeJSON()
 }

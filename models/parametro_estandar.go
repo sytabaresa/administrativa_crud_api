@@ -10,7 +10,7 @@ import (
 )
 
 type ParametroEstandar struct {
-	Id                   int    `orm:"column(id_parametro);pk"`
+	Id                   int    `orm:"column(id_parametro);pk;auto"`
 	ClaseParametro       string `orm:"column(clase_parametro);null"`
 	ValorParametro       string `orm:"column(valor_parametro)"`
 	DescripcionParametro string `orm:"column(descripcion_parametro);null"`
@@ -48,7 +48,7 @@ func GetParametroEstandarById(id int) (v *ParametroEstandar, err error) {
 func GetAllParametroEstandar(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(ParametroEstandar))
+	qs := o.QueryTable(new(ParametroEstandar)).RelatedSel(5)
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute

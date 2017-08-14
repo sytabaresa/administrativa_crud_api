@@ -10,10 +10,10 @@ import (
 )
 
 type ResolucionVinculacionDocente struct {
-	NivelAcademico string `orm:"column(nivel_academico)"`
-	Dedicacion     string `orm:"column(dedicacion)"`
+	Id             int    `orm:"column(id_resolucion);pk;auto"`
 	IdFacultad     int    `orm:"column(id_facultad)"`
-	Id             int    `orm:"column(id_resolucion);pk"`
+	Dedicacion     string `orm:"column(dedicacion)"`
+	NivelAcademico string `orm:"column(nivel_academico)"`
 }
 
 func (t *ResolucionVinculacionDocente) TableName() string {
@@ -48,12 +48,16 @@ func GetResolucionVinculacionDocenteById(id int) (v *ResolucionVinculacionDocent
 func GetAllResolucionVinculacionDocente(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(ResolucionVinculacionDocente))
+	qs := o.QueryTable(new(ResolucionVinculacionDocente)).RelatedSel(5)
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute
 		k = strings.Replace(k, ".", "__", -1)
-		qs = qs.Filter(k, v)
+		if strings.Contains(k, "isnull") {
+			qs = qs.Filter(k, (v == "true" || v == "1"))
+		} else {
+			qs = qs.Filter(k, v)
+		}
 	}
 	// order by:
 	var sortFields []string

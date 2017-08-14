@@ -1,16 +1,16 @@
 package controllers
 
 import (
-	"github.com/udistrital/administrativa_crud_api/models"
 	"encoding/json"
 	"errors"
+	"github.com/udistrital/administrativa_crud_api/models"
 	"strconv"
 	"strings"
 
 	"github.com/astaxie/beego"
 )
 
-// RequisitoMinimoController oprations for RequisitoMinimo
+// RequisitoMinimoController operations for RequisitoMinimo
 type RequisitoMinimoController struct {
 	beego.Controller
 }

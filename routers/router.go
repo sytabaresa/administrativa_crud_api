@@ -321,6 +321,12 @@ func init() {
 				&controllers.ResolucionController{},
 			),
 		),
+
+		beego.NSNamespace("/contenido_resolucion",
+			beego.NSInclude(
+				&controllers.ResolucionCompletaController{},
+			),
+		),
 	)
 	beego.AddNamespace(ns)
 }

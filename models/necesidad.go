@@ -4,35 +4,37 @@ import (
 	"errors"
 	"fmt"
 	"reflect"
+	"strconv"
 	"strings"
 	"time"
-	"strconv"
 
 	"github.com/astaxie/beego/orm"
 )
 
 type Necesidad struct {
-	Id                     int                 `orm:"column(id);pk;auto"`
-	Numero                 int                 `orm:"column(numero);null"`
-	Vigencia               float64             `orm:"column(vigencia)"`
-	Objeto                 string              `orm:"column(objeto)"`
-	FechaSolicitud         time.Time           `orm:"column(fecha_solicitud);type(date)"`
-	Valor                  float64             `orm:"column(valor)"`
-	Justificacion          string              `orm:"column(justificacion)"`
-	UnidadEjecutora        int                 `orm:"column(unidad_ejecutora)"`
-	DiasDuracion           float64             `orm:"column(dias_duracion)"`
-	UnicoPago              bool                `orm:"column(unico_pago)"`
-	AgotarPresupuesto      bool                `orm:"column(agotar_presupuesto)"`
-	ModalidadSeleccion     *ModalidadSeleccion `orm:"column(modalidad_seleccion);rel(fk)"`
-	Servicio               *Servicio           `orm:"column(servicio);rel(fk)"`
-	PlanAnualAdquisiciones int                 `orm:"column(plan_anual_adquisiciones)"`
-	EstudioMercado         string              `orm:"column(estudio_mercado);null"`
-	TipoRubro              *TipoRubro          `orm:"column(tipo_rubro);rel(fk)"`
-	AnalisisRiesgo         string              `orm:"column(analisis_riesgo);null"`
-	NumeroElaboracion      int                 `orm:"column(numero_elaboracion)"`
-	OtroSi                 int                 `orm:"column(otro_si);null"`
-	FechaModificacion      time.Time           `orm:"column(fecha_modificacion);type(date)"`
-	Estado                 *EstadoNecesidad    `orm:"column(estado);rel(fk)"`
+	Id                     int                                 `orm:"column(id);pk;auto"`
+	Numero                 int                                 `orm:"column(numero);null"`
+	Vigencia               float64                             `orm:"column(vigencia)"`
+	Objeto                 string                              `orm:"column(objeto)"`
+	FechaSolicitud         time.Time                           `orm:"column(fecha_solicitud);type(date)"`
+	Valor                  float64                             `orm:"column(valor)"`
+	Justificacion          string                              `orm:"column(justificacion)"`
+	UnidadEjecutora        int                                 `orm:"column(unidad_ejecutora)"`
+	DiasDuracion           float64                             `orm:"column(dias_duracion)"`
+	UnicoPago              bool                                `orm:"column(unico_pago)"`
+	AgotarPresupuesto      bool                                `orm:"column(agotar_presupuesto)"`
+	ModalidadSeleccion     *ModalidadSeleccion                 `orm:"column(modalidad_seleccion);rel(fk)"`
+	Servicio               *Servicio                           `orm:"column(servicio);rel(fk)"`
+	PlanAnualAdquisiciones int                                 `orm:"column(plan_anual_adquisiciones)"`
+	EstudioMercado         string                              `orm:"column(estudio_mercado);null"`
+	TipoRubro              *TipoRubro                          `orm:"column(tipo_rubro);rel(fk)"`
+	AnalisisRiesgo         string                              `orm:"column(analisis_riesgo);null"`
+	NumeroElaboracion      int                                 `orm:"column(numero_elaboracion)"`
+	OtroSi                 int                                 `orm:"column(otro_si);null"`
+	FechaModificacion      time.Time                           `orm:"column(fecha_modificacion);type(date)"`
+	Estado                 *EstadoNecesidad                    `orm:"column(estado);rel(fk)"`
+	FuenteReversa          []*FuenteFinanciacionRubroNecesidad `orm:"reverse(many)"`
+	DependenciaReversa     []*DependenciaNecesidad             `orm:"reverse(many)"`
 }
 
 func (t *Necesidad) TableName() string {
@@ -75,8 +77,8 @@ func GetAllNecesidad(query map[string]string, fields []string, sortby []string, 
 		if strings.Contains(k, "isnull") {
 			qs = qs.Filter(k, (v == "true" || v == "1"))
 		} else if strings.Contains(k, "not_in") {
-            k = strings.Replace(k, "__not_in", "", -1)
-            qs = qs.Exclude(k, v)
+			k = strings.Replace(k, "__not_in", "", -1)
+			qs = qs.Exclude(k, v)
 		} else {
 			qs = qs.Filter(k, v)
 		}
@@ -125,6 +127,8 @@ func GetAllNecesidad(query map[string]string, fields []string, sortby []string, 
 	if _, err = qs.Limit(limit, offset).All(&l, fields...); err == nil {
 		if len(fields) == 0 {
 			for _, v := range l {
+				o.LoadRelated(&v, "FuenteReversa", 5)
+				o.LoadRelated(&v, "DependenciaReversa", 5)
 				ml = append(ml, v)
 			}
 		} else {
@@ -150,8 +154,8 @@ func UpdateNecesidadById(m *Necesidad) (alerta []string, err error) {
 	v := Necesidad{Id: m.Id}
 	alerta = append(alerta, "success")
 	var a []int
-	var b = strconv.FormatFloat(m.Vigencia,'E',-1,64)
-	_,err = o.Raw("SELECT COALESCE(MAX(numero), 0)+1 FROM administrativa.necesidad WHERE vigencia="+b).QueryRows(&a)
+	var b = strconv.FormatFloat(m.Vigencia, 'E', -1, 64)
+	_, err = o.Raw("SELECT COALESCE(MAX(numero), 0)+1 FROM administrativa.necesidad WHERE vigencia=" + b).QueryRows(&a)
 	m.Numero = a[0]
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {

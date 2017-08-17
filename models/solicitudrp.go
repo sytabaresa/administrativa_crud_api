@@ -20,6 +20,7 @@ type SolicitudRp struct {
 	VigenciaContrato string    `orm:"column(vigencia_contrato)"`
 	Compromiso       int       `orm:"column(compromiso)"`
 	Justificacion    int       `orm:"column(justificacion_rechazo)"`
+	Masivo bool `orm:"column(masivo)"`
 }
 
 func (t *SolicitudRp) TableName() string {

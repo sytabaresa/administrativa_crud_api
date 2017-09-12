@@ -47,7 +47,7 @@ type ContratoGeneral struct {
 	NumeroConstancia			 int    				`orm:"column(numero_constancia);null"`
 	RegistroPresupuestal		 int    				`orm:"column(resgistro_presupuestal);null"`
 	Estado          			 bool   				`orm:"column(estado);null"`
-	TipoContrato                 *TipoContrato         	`orm:"column(tipo_contrato)"`
+	TipoContrato                 int         	`orm:"column(tipo_contrato)"`
 	LugarEjecucion               *LugarEjecucion       	`orm:"column(lugar_ejecucion);rel(fk)"`
 	UnidadEjecucion              *Parametros        	`orm:"column(unidad_ejecucion);rel(fk)"`
 	UnidadEjecutora              int    				`orm:"column(unidad_ejecutora)"`

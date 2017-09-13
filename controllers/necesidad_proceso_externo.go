@@ -3,20 +3,21 @@ package controllers
 import (
 	"encoding/json"
 	"errors"
-	"github.com/udistrital/administrativa_crud_api/models"
 	"strconv"
 	"strings"
+
+	"github.com/udistrital/administrativa_crud_api/models"
 
 	"github.com/astaxie/beego"
 )
 
-// SupervisorSolicitudNecesidadController operations for SupervisorSolicitudNecesidad
-type SupervisorSolicitudNecesidadController struct {
+// NecesidadProcesoExternoController operations for NecesidadProcesoExterno
+type NecesidadProcesoExternoController struct {
 	beego.Controller
 }
 
 // URLMapping ...
-func (c *SupervisorSolicitudNecesidadController) URLMapping() {
+func (c *NecesidadProcesoExternoController) URLMapping() {
 	c.Mapping("Post", c.Post)
 	c.Mapping("GetOne", c.GetOne)
 	c.Mapping("GetAll", c.GetAll)
@@ -26,15 +27,15 @@ func (c *SupervisorSolicitudNecesidadController) URLMapping() {
 
 // Post ...
 // @Title Post
-// @Description create SupervisorSolicitudNecesidad
-// @Param	body		body 	models.SupervisorSolicitudNecesidad	true		"body for SupervisorSolicitudNecesidad content"
-// @Success 201 {int} models.SupervisorSolicitudNecesidad
+// @Description create NecesidadProcesoExterno
+// @Param	body		body 	models.NecesidadProcesoExterno	true		"body for NecesidadProcesoExterno content"
+// @Success 201 {int} models.NecesidadProcesoExterno
 // @Failure 403 body is empty
 // @router / [post]
-func (c *SupervisorSolicitudNecesidadController) Post() {
-	var v models.SupervisorSolicitudNecesidad
+func (c *NecesidadProcesoExternoController) Post() {
+	var v models.NecesidadProcesoExterno
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
-		if _, err := models.AddSupervisorSolicitudNecesidad(&v); err == nil {
+		if _, err := models.AddNecesidadProcesoExterno(&v); err == nil {
 			c.Ctx.Output.SetStatus(201)
 			c.Data["json"] = v
 		} else {
@@ -48,15 +49,15 @@ func (c *SupervisorSolicitudNecesidadController) Post() {
 
 // GetOne ...
 // @Title Get One
-// @Description get SupervisorSolicitudNecesidad by id
+// @Description get NecesidadProcesoExterno by id
 // @Param	id		path 	string	true		"The key for staticblock"
-// @Success 200 {object} models.SupervisorSolicitudNecesidad
+// @Success 200 {object} models.NecesidadProcesoExterno
 // @Failure 403 :id is empty
 // @router /:id [get]
-func (c *SupervisorSolicitudNecesidadController) GetOne() {
+func (c *NecesidadProcesoExternoController) GetOne() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
-	v, err := models.GetSupervisorSolicitudNecesidadById(id)
+	v, err := models.GetNecesidadProcesoExternoById(id)
 	if err != nil {
 		c.Data["json"] = err.Error()
 	} else {
@@ -67,17 +68,17 @@ func (c *SupervisorSolicitudNecesidadController) GetOne() {
 
 // GetAll ...
 // @Title Get All
-// @Description get SupervisorSolicitudNecesidad
+// @Description get NecesidadProcesoExterno
 // @Param	query	query	string	false	"Filter. e.g. col1:v1,col2:v2 ..."
 // @Param	fields	query	string	false	"Fields returned. e.g. col1,col2 ..."
 // @Param	sortby	query	string	false	"Sorted-by fields. e.g. col1,col2 ..."
 // @Param	order	query	string	false	"Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ..."
 // @Param	limit	query	string	false	"Limit the size of result set. Must be an integer"
 // @Param	offset	query	string	false	"Start position of result set. Must be an integer"
-// @Success 200 {object} models.SupervisorSolicitudNecesidad
+// @Success 200 {object} models.NecesidadProcesoExterno
 // @Failure 403
 // @router / [get]
-func (c *SupervisorSolicitudNecesidadController) GetAll() {
+func (c *NecesidadProcesoExternoController) GetAll() {
 	var fields []string
 	var sortby []string
 	var order []string
@@ -119,7 +120,7 @@ func (c *SupervisorSolicitudNecesidadController) GetAll() {
 		}
 	}
 
-	l, err := models.GetAllSupervisorSolicitudNecesidad(query, fields, sortby, order, offset, limit)
+	l, err := models.GetAllNecesidadProcesoExterno(query, fields, sortby, order, offset, limit)
 	if err != nil {
 		c.Data["json"] = err.Error()
 	} else {
@@ -130,18 +131,18 @@ func (c *SupervisorSolicitudNecesidadController) GetAll() {
 
 // Put ...
 // @Title Put
-// @Description update the SupervisorSolicitudNecesidad
+// @Description update the NecesidadProcesoExterno
 // @Param	id		path 	string	true		"The id you want to update"
-// @Param	body		body 	models.SupervisorSolicitudNecesidad	true		"body for SupervisorSolicitudNecesidad content"
-// @Success 200 {object} models.SupervisorSolicitudNecesidad
+// @Param	body		body 	models.NecesidadProcesoExterno	true		"body for NecesidadProcesoExterno content"
+// @Success 200 {object} models.NecesidadProcesoExterno
 // @Failure 403 :id is not int
 // @router /:id [put]
-func (c *SupervisorSolicitudNecesidadController) Put() {
+func (c *NecesidadProcesoExternoController) Put() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
-	v := models.SupervisorSolicitudNecesidad{Id: id}
+	v := models.NecesidadProcesoExterno{Id: id}
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
-		if err := models.UpdateSupervisorSolicitudNecesidadById(&v); err == nil {
+		if err := models.UpdateNecesidadProcesoExternoById(&v); err == nil {
 			c.Data["json"] = "OK"
 		} else {
 			c.Data["json"] = err.Error()
@@ -154,15 +155,15 @@ func (c *SupervisorSolicitudNecesidadController) Put() {
 
 // Delete ...
 // @Title Delete
-// @Description delete the SupervisorSolicitudNecesidad
+// @Description delete the NecesidadProcesoExterno
 // @Param	id		path 	string	true		"The id you want to delete"
 // @Success 200 {string} delete success!
 // @Failure 403 id is empty
 // @router /:id [delete]
-func (c *SupervisorSolicitudNecesidadController) Delete() {
+func (c *NecesidadProcesoExternoController) Delete() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
-	if err := models.DeleteSupervisorSolicitudNecesidad(id); err == nil {
+	if err := models.DeleteNecesidadProcesoExterno(id); err == nil {
 		c.Data["json"] = "OK"
 	} else {
 		c.Data["json"] = err.Error()

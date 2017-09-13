@@ -12,29 +12,32 @@ import (
 )
 
 type Necesidad struct {
-	Id                     int                                 `orm:"column(id);pk;auto"`
-	Numero                 int                                 `orm:"column(numero);null"`
-	Vigencia               float64                             `orm:"column(vigencia)"`
-	Objeto                 string                              `orm:"column(objeto)"`
-	FechaSolicitud         time.Time                           `orm:"column(fecha_solicitud);type(date)"`
-	Valor                  float64                             `orm:"column(valor)"`
-	Justificacion          string                              `orm:"column(justificacion)"`
-	UnidadEjecutora        int                                 `orm:"column(unidad_ejecutora)"`
-	DiasDuracion           float64                             `orm:"column(dias_duracion)"`
-	UnicoPago              bool                                `orm:"column(unico_pago)"`
-	AgotarPresupuesto      bool                                `orm:"column(agotar_presupuesto)"`
-	ModalidadSeleccion     *ModalidadSeleccion                 `orm:"column(modalidad_seleccion);rel(fk)"`
-	Servicio               *Servicio                           `orm:"column(servicio);rel(fk)"`
-	PlanAnualAdquisiciones int                                 `orm:"column(plan_anual_adquisiciones)"`
-	EstudioMercado         string                              `orm:"column(estudio_mercado);null"`
-	TipoRubro              *TipoRubro                          `orm:"column(tipo_rubro);rel(fk)"`
-	AnalisisRiesgo         string                              `orm:"column(analisis_riesgo);null"`
-	NumeroElaboracion      int                                 `orm:"column(numero_elaboracion)"`
-	OtroSi                 int                                 `orm:"column(otro_si);null"`
-	FechaModificacion      time.Time                           `orm:"column(fecha_modificacion);type(date)"`
-	Estado                 *EstadoNecesidad                    `orm:"column(estado);rel(fk)"`
-	FuenteReversa          []*FuenteFinanciacionRubroNecesidad `orm:"reverse(many)"`
-	DependenciaReversa     []*DependenciaNecesidad             `orm:"reverse(many)"`
+	Id                        int                                 `orm:"column(id);pk;auto"`
+	Numero                    int                                 `orm:"column(numero);null"`
+	Vigencia                  float64                             `orm:"column(vigencia)"`
+	Objeto                    string                              `orm:"column(objeto)"`
+	FechaSolicitud            time.Time                           `orm:"column(fecha_solicitud);type(date)"`
+	Valor                     float64                             `orm:"column(valor)"`
+	Justificacion             string                              `orm:"column(justificacion)"`
+	UnidadEjecutora           int                                 `orm:"column(unidad_ejecutora)"`
+	DiasDuracion              float64                             `orm:"column(dias_duracion)"`
+	UnicoPago                 bool                                `orm:"column(unico_pago)"`
+	AgotarPresupuesto         bool                                `orm:"column(agotar_presupuesto)"`
+	ModalidadSeleccion        *ModalidadSeleccion                 `orm:"column(modalidad_seleccion);rel(fk)"`
+	TipoContratoNecesidad     *TipoContratoNecesidad              `orm:"column(tipo_contrato_necesidad);rel(fk)"`
+	PlanAnualAdquisiciones    int                                 `orm:"column(plan_anual_adquisiciones)"`
+	EstudioMercado            string                              `orm:"column(estudio_mercado);null"`
+	TipoFinanciacionNecesidad *TipoFinanciacionNecesidad          `orm:"column(tipo_financiacion_necesidad);rel(fk)"`
+	Supervisor                int                                 `orm:"column(supervisor)"`
+	AnalisisRiesgo            string                              `orm:"column(analisis_riesgo);null"`
+	NumeroElaboracion         int                                 `orm:"column(numero_elaboracion)"`
+	FechaModificacion         time.Time                           `orm:"column(fecha_modificacion);type(date)"`
+	EstadoNecesidad           *EstadoNecesidad                    `orm:"column(estado_necesidad);rel(fk)"`
+	JustificacionRechazo      string                              `orm:"column(justificacion_rechazo)"`
+	JustificacionAnulacion    string                              `orm:"column(justificacion_anulacion)"`
+	TipoNecesidad             *TipoNecesidad                      `orm:"column(tipo_necesidad);rel(fk)"`
+	FuenteReversa             []*FuenteFinanciacionRubroNecesidad `orm:"reverse(many)"`
+	DependenciaReversa        []*DependenciaNecesidad             `orm:"reverse(many)"`
 }
 
 func (t *Necesidad) TableName() string {

@@ -3,20 +3,21 @@ package controllers
 import (
 	"encoding/json"
 	"errors"
-	"github.com/udistrital/administrativa_crud_api/models"
 	"strconv"
 	"strings"
+
+	"github.com/udistrital/administrativa_crud_api/models"
 
 	"github.com/astaxie/beego"
 )
 
-// NecesidadRechazadaController operations for NecesidadRechazada
-type NecesidadRechazadaController struct {
+// TipoContratoNecesidadController operations for TipoContratoNecesidad
+type TipoContratoNecesidadController struct {
 	beego.Controller
 }
 
 // URLMapping ...
-func (c *NecesidadRechazadaController) URLMapping() {
+func (c *TipoContratoNecesidadController) URLMapping() {
 	c.Mapping("Post", c.Post)
 	c.Mapping("GetOne", c.GetOne)
 	c.Mapping("GetAll", c.GetAll)
@@ -26,15 +27,15 @@ func (c *NecesidadRechazadaController) URLMapping() {
 
 // Post ...
 // @Title Post
-// @Description create NecesidadRechazada
-// @Param	body		body 	models.NecesidadRechazada	true		"body for NecesidadRechazada content"
-// @Success 201 {int} models.NecesidadRechazada
+// @Description create TipoContratoNecesidad
+// @Param	body		body 	models.TipoContratoNecesidad	true		"body for TipoContratoNecesidad content"
+// @Success 201 {int} models.TipoContratoNecesidad
 // @Failure 403 body is empty
 // @router / [post]
-func (c *NecesidadRechazadaController) Post() {
-	var v models.NecesidadRechazada
+func (c *TipoContratoNecesidadController) Post() {
+	var v models.TipoContratoNecesidad
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
-		if _, err := models.AddNecesidadRechazada(&v); err == nil {
+		if _, err := models.AddTipoContratoNecesidad(&v); err == nil {
 			c.Ctx.Output.SetStatus(201)
 			c.Data["json"] = v
 		} else {
@@ -48,15 +49,15 @@ func (c *NecesidadRechazadaController) Post() {
 
 // GetOne ...
 // @Title Get One
-// @Description get NecesidadRechazada by id
+// @Description get TipoContratoNecesidad by id
 // @Param	id		path 	string	true		"The key for staticblock"
-// @Success 200 {object} models.NecesidadRechazada
+// @Success 200 {object} models.TipoContratoNecesidad
 // @Failure 403 :id is empty
 // @router /:id [get]
-func (c *NecesidadRechazadaController) GetOne() {
+func (c *TipoContratoNecesidadController) GetOne() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
-	v, err := models.GetNecesidadRechazadaById(id)
+	v, err := models.GetTipoContratoNecesidadById(id)
 	if err != nil {
 		c.Data["json"] = err.Error()
 	} else {
@@ -67,17 +68,17 @@ func (c *NecesidadRechazadaController) GetOne() {
 
 // GetAll ...
 // @Title Get All
-// @Description get NecesidadRechazada
+// @Description get TipoContratoNecesidad
 // @Param	query	query	string	false	"Filter. e.g. col1:v1,col2:v2 ..."
 // @Param	fields	query	string	false	"Fields returned. e.g. col1,col2 ..."
 // @Param	sortby	query	string	false	"Sorted-by fields. e.g. col1,col2 ..."
 // @Param	order	query	string	false	"Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ..."
 // @Param	limit	query	string	false	"Limit the size of result set. Must be an integer"
 // @Param	offset	query	string	false	"Start position of result set. Must be an integer"
-// @Success 200 {object} models.NecesidadRechazada
+// @Success 200 {object} models.TipoContratoNecesidad
 // @Failure 403
 // @router / [get]
-func (c *NecesidadRechazadaController) GetAll() {
+func (c *TipoContratoNecesidadController) GetAll() {
 	var fields []string
 	var sortby []string
 	var order []string
@@ -119,7 +120,7 @@ func (c *NecesidadRechazadaController) GetAll() {
 		}
 	}
 
-	l, err := models.GetAllNecesidadRechazada(query, fields, sortby, order, offset, limit)
+	l, err := models.GetAllTipoContratoNecesidad(query, fields, sortby, order, offset, limit)
 	if err != nil {
 		c.Data["json"] = err.Error()
 	} else {
@@ -130,18 +131,18 @@ func (c *NecesidadRechazadaController) GetAll() {
 
 // Put ...
 // @Title Put
-// @Description update the NecesidadRechazada
+// @Description update the TipoContratoNecesidad
 // @Param	id		path 	string	true		"The id you want to update"
-// @Param	body		body 	models.NecesidadRechazada	true		"body for NecesidadRechazada content"
-// @Success 200 {object} models.NecesidadRechazada
+// @Param	body		body 	models.TipoContratoNecesidad	true		"body for TipoContratoNecesidad content"
+// @Success 200 {object} models.TipoContratoNecesidad
 // @Failure 403 :id is not int
 // @router /:id [put]
-func (c *NecesidadRechazadaController) Put() {
+func (c *TipoContratoNecesidadController) Put() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
-	v := models.NecesidadRechazada{Id: id}
+	v := models.TipoContratoNecesidad{Id: id}
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
-		if err := models.UpdateNecesidadRechazadaById(&v); err == nil {
+		if err := models.UpdateTipoContratoNecesidadById(&v); err == nil {
 			c.Data["json"] = "OK"
 		} else {
 			c.Data["json"] = err.Error()
@@ -154,15 +155,15 @@ func (c *NecesidadRechazadaController) Put() {
 
 // Delete ...
 // @Title Delete
-// @Description delete the NecesidadRechazada
+// @Description delete the TipoContratoNecesidad
 // @Param	id		path 	string	true		"The id you want to delete"
 // @Success 200 {string} delete success!
 // @Failure 403 id is empty
 // @router /:id [delete]
-func (c *NecesidadRechazadaController) Delete() {
+func (c *TipoContratoNecesidadController) Delete() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
-	if err := models.DeleteNecesidadRechazada(id); err == nil {
+	if err := models.DeleteTipoContratoNecesidad(id); err == nil {
 		c.Data["json"] = "OK"
 	} else {
 		c.Data["json"] = err.Error()

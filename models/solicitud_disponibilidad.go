@@ -4,9 +4,9 @@ import (
 	"errors"
 	"fmt"
 	"reflect"
+	"strconv"
 	"strings"
 	"time"
-	"strconv"
 
 	"github.com/astaxie/beego/orm"
 )
@@ -39,16 +39,16 @@ func AddSolicitudDisponibilidad(m *SolicitudDisponibilidad) (alerta []string, er
 	m.Vigencia = float64((m.FechaSolicitud).Year())
 	m.Expedida = false
 	var a []int
-	_,err = o.Raw("SELECT COALESCE(MAX(numero), 0)+1 FROM administrativa.solicitud_disponibilidad WHERE vigencia="+strconv.Itoa((m.FechaSolicitud).Year())+";").QueryRows(&a)
+	_, err = o.Raw("SELECT COALESCE(MAX(numero), 0)+1 FROM administrativa.solicitud_disponibilidad WHERE vigencia=" + strconv.Itoa((m.FechaSolicitud).Year()) + ";").QueryRows(&a)
 	m.Numero = a[0]
-	if _, err = o.Insert(m); err!=nil{
+	if _, err = o.Insert(m); err != nil {
 		alerta[0] = "error"
 		alerta = append(alerta, "Error: ¡Ocurrió un error al insertar la solicitud de disponibilidad!")
 		o.Rollback()
 		return
 	} else {
-		m.Necesidad.Estado.Id=7;
-		if _,err = o.Update(m.Necesidad); err!=nil{
+		m.Necesidad.EstadoNecesidad.Id = 7
+		if _, err = o.Update(m.Necesidad); err != nil {
 			alerta[0] = "error"
 			alerta = append(alerta, "Error: ¡Ocurrió un error al actualizar el estado de la necesidad!")
 			o.Rollback()

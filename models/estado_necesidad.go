@@ -5,16 +5,17 @@ import (
 	"fmt"
 	"reflect"
 	"strings"
-	"time"
 
 	"github.com/astaxie/beego/orm"
 )
 
 type EstadoNecesidad struct {
-	Id            int       `orm:"column(id);pk;auto"`
-	Nombre        string    `orm:"column(nombre)"`
-	Descripcion   string    `orm:"column(descripcion);null"`
-	FechaRegistro time.Time `orm:"column(fecha_registro);type(date)"`
+	Id                int    `orm:"column(id);pk;auto"`
+	Nombre            string `orm:"column(nombre)"`
+	Descripcion       string `orm:"column(descripcion);null"`
+	CodigoAbreviacion string `orm:"column(codigo_abreviacion);null"`
+	Estado            bool   `orm:"column(estado)"`
+	NumeroOrden       string `orm:"column(numero_orden);null"`
 }
 
 func (t *EstadoNecesidad) TableName() string {

@@ -10,11 +10,11 @@ import (
 )
 
 type FuenteFinanciacionRubroNecesidad struct {
-	Id                 int        `orm:"column(id);pk;auto"`
-	FuenteFinanciacion int        `orm:"column(fuente_financiacion);null"`
-	Apropiacion        int        `orm:"column(apropiacion)"`
-	MontoParcial       float64    `orm:"column(monto_parcial)"`
-	SolicitudNecesidad *Necesidad `orm:"column(solicitud_necesidad);rel(fk)"`
+	Id                   int        `orm:"column(id);pk;auto"`
+	FuenteFinanciamiento int        `orm:"column(fuente_financiamiento);null"`
+	Apropiacion          int        `orm:"column(apropiacion)"`
+	MontoParcial         float64    `orm:"column(monto_parcial)"`
+	Necesidad            *Necesidad `orm:"column(necesidad);rel(fk)"`
 }
 
 func (t *FuenteFinanciacionRubroNecesidad) TableName() string {

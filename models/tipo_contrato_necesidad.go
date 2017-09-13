@@ -5,52 +5,52 @@ import (
 	"fmt"
 	"reflect"
 	"strings"
-	"time"
 
 	"github.com/astaxie/beego/orm"
 )
 
-type SupervisorSolicitudNecesidad struct {
-	Id                 int        `orm:"column(id);pk;auto"`
-	SolicitudNecesidad *Necesidad `orm:"column(solicitud_necesidad);rel(fk)"`
-	Funcionario        int        `orm:"column(funcionario)"`
-	FechaAsginacion    time.Time  `orm:"column(fecha_asginacion);type(date)"`
-	Estado             string     `orm:"column(estado)"`
+type TipoContratoNecesidad struct {
+	Id                int    `orm:"column(id);pk;auto"`
+	Nombre            string `orm:"column(nombre)"`
+	Descripcion       string `orm:"column(descripcion);null"`
+	CodigoAbreviacion string `orm:"column(codigo_abreviacion);null"`
+	Estado            bool   `orm:"column(estado)"`
+	NumeroOrden       string `orm:"column(numero_orden);null"`
 }
 
-func (t *SupervisorSolicitudNecesidad) TableName() string {
-	return "supervisor_solicitud_necesidad"
+func (t *TipoContratoNecesidad) TableName() string {
+	return "tipo_contrato_necesidad"
 }
 
 func init() {
-	orm.RegisterModel(new(SupervisorSolicitudNecesidad))
+	orm.RegisterModel(new(TipoContratoNecesidad))
 }
 
-// AddSupervisorSolicitudNecesidad insert a new SupervisorSolicitudNecesidad into database and returns
+// AddTipoContratoNecesidad insert a new TipoContratoNecesidad into database and returns
 // last inserted Id on success.
-func AddSupervisorSolicitudNecesidad(m *SupervisorSolicitudNecesidad) (id int64, err error) {
+func AddTipoContratoNecesidad(m *TipoContratoNecesidad) (id int64, err error) {
 	o := orm.NewOrm()
 	id, err = o.Insert(m)
 	return
 }
 
-// GetSupervisorSolicitudNecesidadById retrieves SupervisorSolicitudNecesidad by Id. Returns error if
+// GetTipoContratoNecesidadById retrieves TipoContratoNecesidad by Id. Returns error if
 // Id doesn't exist
-func GetSupervisorSolicitudNecesidadById(id int) (v *SupervisorSolicitudNecesidad, err error) {
+func GetTipoContratoNecesidadById(id int) (v *TipoContratoNecesidad, err error) {
 	o := orm.NewOrm()
-	v = &SupervisorSolicitudNecesidad{Id: id}
+	v = &TipoContratoNecesidad{Id: id}
 	if err = o.Read(v); err == nil {
 		return v, nil
 	}
 	return nil, err
 }
 
-// GetAllSupervisorSolicitudNecesidad retrieves all SupervisorSolicitudNecesidad matches certain condition. Returns empty list if
+// GetAllTipoContratoNecesidad retrieves all TipoContratoNecesidad matches certain condition. Returns empty list if
 // no records exist
-func GetAllSupervisorSolicitudNecesidad(query map[string]string, fields []string, sortby []string, order []string,
+func GetAllTipoContratoNecesidad(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(SupervisorSolicitudNecesidad)).RelatedSel(5)
+	qs := o.QueryTable(new(TipoContratoNecesidad)).RelatedSel(5)
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute
@@ -100,7 +100,7 @@ func GetAllSupervisorSolicitudNecesidad(query map[string]string, fields []string
 		}
 	}
 
-	var l []SupervisorSolicitudNecesidad
+	var l []TipoContratoNecesidad
 	qs = qs.OrderBy(sortFields...)
 	if _, err = qs.Limit(limit, offset).All(&l, fields...); err == nil {
 		if len(fields) == 0 {
@@ -123,11 +123,11 @@ func GetAllSupervisorSolicitudNecesidad(query map[string]string, fields []string
 	return nil, err
 }
 
-// UpdateSupervisorSolicitudNecesidad updates SupervisorSolicitudNecesidad by Id and returns error if
+// UpdateTipoContratoNecesidad updates TipoContratoNecesidad by Id and returns error if
 // the record to be updated doesn't exist
-func UpdateSupervisorSolicitudNecesidadById(m *SupervisorSolicitudNecesidad) (err error) {
+func UpdateTipoContratoNecesidadById(m *TipoContratoNecesidad) (err error) {
 	o := orm.NewOrm()
-	v := SupervisorSolicitudNecesidad{Id: m.Id}
+	v := TipoContratoNecesidad{Id: m.Id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
@@ -138,15 +138,15 @@ func UpdateSupervisorSolicitudNecesidadById(m *SupervisorSolicitudNecesidad) (er
 	return
 }
 
-// DeleteSupervisorSolicitudNecesidad deletes SupervisorSolicitudNecesidad by Id and returns error if
+// DeleteTipoContratoNecesidad deletes TipoContratoNecesidad by Id and returns error if
 // the record to be deleted doesn't exist
-func DeleteSupervisorSolicitudNecesidad(id int) (err error) {
+func DeleteTipoContratoNecesidad(id int) (err error) {
 	o := orm.NewOrm()
-	v := SupervisorSolicitudNecesidad{Id: id}
+	v := TipoContratoNecesidad{Id: id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
-		if num, err = o.Delete(&SupervisorSolicitudNecesidad{Id: id}); err == nil {
+		if num, err = o.Delete(&TipoContratoNecesidad{Id: id}); err == nil {
 			fmt.Println("Number of records deleted in database:", num)
 		}
 	}

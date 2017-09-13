@@ -1,8 +1,8 @@
 {
     "swagger": "2.0",
     "info": {
-        "title": "Administrativa Crud API",
-        "description": "administrativa has a very cool tools to autogenerate documents for your API",
+        "title": "beego Test API",
+        "description": "beego has a very cool tools to autogenerate documents for your API",
         "version": "1.0.0",
         "termsOfService": "http://beego.me/",
         "contact": {
@@ -13,7 +13,7 @@
             "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
         }
     },
-    "basePath": "/administrativa_api/v1",
+    "basePath": "/v1",
     "paths": {
         "/acta_inicio/": {
             "get": {
@@ -500,174 +500,6 @@
                 ],
                 "description": "delete the ActividadEspecifica",
                 "operationId": "ActividadEspecificaController.Delete",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "description": "The id you want to delete",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "{string} delete success!"
-                    },
-                    "403": {
-                        "description": "id is empty"
-                    }
-                }
-            }
-        },
-        "/actividad_solicitud_necesidad/": {
-            "get": {
-                "tags": [
-                    "actividad_solicitud_necesidad"
-                ],
-                "description": "get ActividadSolicitudNecesidad",
-                "operationId": "ActividadSolicitudNecesidadController.Get All",
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "query",
-                        "description": "Filter. e.g. col1:v1,col2:v2 ...",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "fields",
-                        "description": "Fields returned. e.g. col1,col2 ...",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "sortby",
-                        "description": "Sorted-by fields. e.g. col1,col2 ...",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "order",
-                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "limit",
-                        "description": "Limit the size of result set. Must be an integer",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "offset",
-                        "description": "Start position of result set. Must be an integer",
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "schema": {
-                            "$ref": "#/definitions/models.ActividadSolicitudNecesidad"
-                        }
-                    },
-                    "403": {}
-                }
-            },
-            "post": {
-                "tags": [
-                    "actividad_solicitud_necesidad"
-                ],
-                "description": "create ActividadSolicitudNecesidad",
-                "operationId": "ActividadSolicitudNecesidadController.Post",
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "body for ActividadSolicitudNecesidad content",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.ActividadSolicitudNecesidad"
-                        }
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "{int} models.ActividadSolicitudNecesidad"
-                    },
-                    "403": {
-                        "description": "body is empty"
-                    }
-                }
-            }
-        },
-        "/actividad_solicitud_necesidad/{id}": {
-            "get": {
-                "tags": [
-                    "actividad_solicitud_necesidad"
-                ],
-                "description": "get ActividadSolicitudNecesidad by id",
-                "operationId": "ActividadSolicitudNecesidadController.Get One",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "description": "The key for staticblock",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "schema": {
-                            "$ref": "#/definitions/models.ActividadSolicitudNecesidad"
-                        }
-                    },
-                    "403": {
-                        "description": ":id is empty"
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "actividad_solicitud_necesidad"
-                ],
-                "description": "update the ActividadSolicitudNecesidad",
-                "operationId": "ActividadSolicitudNecesidadController.Put",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "description": "The id you want to update",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "body for ActividadSolicitudNecesidad content",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.ActividadSolicitudNecesidad"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "schema": {
-                            "$ref": "#/definitions/models.ActividadSolicitudNecesidad"
-                        }
-                    },
-                    "403": {
-                        "description": ":id is not int"
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "actividad_solicitud_necesidad"
-                ],
-                "description": "delete the ActividadSolicitudNecesidad",
-                "operationId": "ActividadSolicitudNecesidadController.Delete",
                 "parameters": [
                     {
                         "in": "path",
@@ -1187,6 +1019,86 @@
                     },
                     "403": {
                         "description": "id is empty"
+                    }
+                }
+            }
+        },
+        "/contenido_resolucion/ResolucionTemplate": {
+            "get": {
+                "tags": [
+                    "contenido_resolucion"
+                ],
+                "description": "get ResolucionCompleta by id",
+                "operationId": "ResolucionCompletaController.Get Template",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "idResolucion",
+                        "description": "The key for staticblock",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/models.ResolucionCompleta"
+                        }
+                    },
+                    "403": {}
+                }
+            }
+        },
+        "/contenido_resolucion/{idResolucion}": {
+            "get": {
+                "tags": [
+                    "contenido_resolucion"
+                ],
+                "description": "get ResolucionCompleta by id",
+                "operationId": "ResolucionCompletaController.Get One",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "idResolucion",
+                        "description": "The key for staticblock",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/models.ResolucionCompleta"
+                        }
+                    },
+                    "403": {
+                        "description": ":idResolucion is empty"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "contenido_resolucion"
+                ],
+                "description": "update the ResolucionCompleta",
+                "operationId": "ResolucionCompletaController.Put",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "idResolucion",
+                        "description": "The id you want to update",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/models.ResolucionCompleta"
+                        }
+                    },
+                    "403": {
+                        "description": ":idResolucion is not int"
                     }
                 }
             }
@@ -2012,6 +1924,174 @@
                 ],
                 "description": "delete the DependenciaNecesidad",
                 "operationId": "DependenciaNecesidadController.Delete",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{string} delete success!"
+                    },
+                    "403": {
+                        "description": "id is empty"
+                    }
+                }
+            }
+        },
+        "/detalle_servicio_necesidad/": {
+            "get": {
+                "tags": [
+                    "detalle_servicio_necesidad"
+                ],
+                "description": "get DetalleServicioNecesidad",
+                "operationId": "DetalleServicioNecesidadController.Get All",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "query",
+                        "description": "Filter. e.g. col1:v1,col2:v2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "description": "Fields returned. e.g. col1,col2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "sortby",
+                        "description": "Sorted-by fields. e.g. col1,col2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "order",
+                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "description": "Limit the size of result set. Must be an integer",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "offset",
+                        "description": "Start position of result set. Must be an integer",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/models.DetalleServicioNecesidad"
+                        }
+                    },
+                    "403": {}
+                }
+            },
+            "post": {
+                "tags": [
+                    "detalle_servicio_necesidad"
+                ],
+                "description": "create DetalleServicioNecesidad",
+                "operationId": "DetalleServicioNecesidadController.Post",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for DetalleServicioNecesidad content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.DetalleServicioNecesidad"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "{int} models.DetalleServicioNecesidad"
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/detalle_servicio_necesidad/{id}": {
+            "get": {
+                "tags": [
+                    "detalle_servicio_necesidad"
+                ],
+                "description": "get DetalleServicioNecesidad by id",
+                "operationId": "DetalleServicioNecesidadController.Get One",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The key for staticblock",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/models.DetalleServicioNecesidad"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is empty"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "detalle_servicio_necesidad"
+                ],
+                "description": "update the DetalleServicioNecesidad",
+                "operationId": "DetalleServicioNecesidadController.Put",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to update",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for DetalleServicioNecesidad content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.DetalleServicioNecesidad"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/models.DetalleServicioNecesidad"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is not int"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "detalle_servicio_necesidad"
+                ],
+                "description": "delete the DetalleServicioNecesidad",
+                "operationId": "DetalleServicioNecesidadController.Delete",
                 "parameters": [
                     {
                         "in": "path",
@@ -3879,13 +3959,13 @@
                 }
             }
         },
-        "/necesidad_otro_si/": {
+        "/necesidad_proceso_externo/": {
             "get": {
                 "tags": [
-                    "necesidad_otro_si"
+                    "necesidad_proceso_externo"
                 ],
-                "description": "get NecesidadOtroSi",
-                "operationId": "NecesidadOtroSiController.Get All",
+                "description": "get NecesidadProcesoExterno",
+                "operationId": "NecesidadProcesoExternoController.Get All",
                 "parameters": [
                     {
                         "in": "query",
@@ -3927,7 +4007,7 @@
                 "responses": {
                     "200": {
                         "schema": {
-                            "$ref": "#/definitions/models.NecesidadOtroSi"
+                            "$ref": "#/definitions/models.NecesidadProcesoExterno"
                         }
                     },
                     "403": {}
@@ -3935,24 +4015,24 @@
             },
             "post": {
                 "tags": [
-                    "necesidad_otro_si"
+                    "necesidad_proceso_externo"
                 ],
-                "description": "create NecesidadOtroSi",
-                "operationId": "NecesidadOtroSiController.Post",
+                "description": "create NecesidadProcesoExterno",
+                "operationId": "NecesidadProcesoExternoController.Post",
                 "parameters": [
                     {
                         "in": "body",
                         "name": "body",
-                        "description": "body for NecesidadOtroSi content",
+                        "description": "body for NecesidadProcesoExterno content",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.NecesidadOtroSi"
+                            "$ref": "#/definitions/models.NecesidadProcesoExterno"
                         }
                     }
                 ],
                 "responses": {
                     "201": {
-                        "description": "{int} models.NecesidadOtroSi"
+                        "description": "{int} models.NecesidadProcesoExterno"
                     },
                     "403": {
                         "description": "body is empty"
@@ -3960,13 +4040,13 @@
                 }
             }
         },
-        "/necesidad_otro_si/{id}": {
+        "/necesidad_proceso_externo/{id}": {
             "get": {
                 "tags": [
-                    "necesidad_otro_si"
+                    "necesidad_proceso_externo"
                 ],
-                "description": "get NecesidadOtroSi by id",
-                "operationId": "NecesidadOtroSiController.Get One",
+                "description": "get NecesidadProcesoExterno by id",
+                "operationId": "NecesidadProcesoExternoController.Get One",
                 "parameters": [
                     {
                         "in": "path",
@@ -3979,7 +4059,7 @@
                 "responses": {
                     "200": {
                         "schema": {
-                            "$ref": "#/definitions/models.NecesidadOtroSi"
+                            "$ref": "#/definitions/models.NecesidadProcesoExterno"
                         }
                     },
                     "403": {
@@ -3989,10 +4069,10 @@
             },
             "put": {
                 "tags": [
-                    "necesidad_otro_si"
+                    "necesidad_proceso_externo"
                 ],
-                "description": "update the NecesidadOtroSi",
-                "operationId": "NecesidadOtroSiController.Put",
+                "description": "update the NecesidadProcesoExterno",
+                "operationId": "NecesidadProcesoExternoController.Put",
                 "parameters": [
                     {
                         "in": "path",
@@ -4004,17 +4084,17 @@
                     {
                         "in": "body",
                         "name": "body",
-                        "description": "body for NecesidadOtroSi content",
+                        "description": "body for NecesidadProcesoExterno content",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.NecesidadOtroSi"
+                            "$ref": "#/definitions/models.NecesidadProcesoExterno"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
                         "schema": {
-                            "$ref": "#/definitions/models.NecesidadOtroSi"
+                            "$ref": "#/definitions/models.NecesidadProcesoExterno"
                         }
                     },
                     "403": {
@@ -4024,178 +4104,10 @@
             },
             "delete": {
                 "tags": [
-                    "necesidad_otro_si"
+                    "necesidad_proceso_externo"
                 ],
-                "description": "delete the NecesidadOtroSi",
-                "operationId": "NecesidadOtroSiController.Delete",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "description": "The id you want to delete",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "{string} delete success!"
-                    },
-                    "403": {
-                        "description": "id is empty"
-                    }
-                }
-            }
-        },
-        "/necesidad_rechazada/": {
-            "get": {
-                "tags": [
-                    "necesidad_rechazada"
-                ],
-                "description": "get NecesidadRechazada",
-                "operationId": "NecesidadRechazadaController.Get All",
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "query",
-                        "description": "Filter. e.g. col1:v1,col2:v2 ...",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "fields",
-                        "description": "Fields returned. e.g. col1,col2 ...",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "sortby",
-                        "description": "Sorted-by fields. e.g. col1,col2 ...",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "order",
-                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "limit",
-                        "description": "Limit the size of result set. Must be an integer",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "offset",
-                        "description": "Start position of result set. Must be an integer",
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "schema": {
-                            "$ref": "#/definitions/models.NecesidadRechazada"
-                        }
-                    },
-                    "403": {}
-                }
-            },
-            "post": {
-                "tags": [
-                    "necesidad_rechazada"
-                ],
-                "description": "create NecesidadRechazada",
-                "operationId": "NecesidadRechazadaController.Post",
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "body for NecesidadRechazada content",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.NecesidadRechazada"
-                        }
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "{int} models.NecesidadRechazada"
-                    },
-                    "403": {
-                        "description": "body is empty"
-                    }
-                }
-            }
-        },
-        "/necesidad_rechazada/{id}": {
-            "get": {
-                "tags": [
-                    "necesidad_rechazada"
-                ],
-                "description": "get NecesidadRechazada by id",
-                "operationId": "NecesidadRechazadaController.Get One",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "description": "The key for staticblock",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "schema": {
-                            "$ref": "#/definitions/models.NecesidadRechazada"
-                        }
-                    },
-                    "403": {
-                        "description": ":id is empty"
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "necesidad_rechazada"
-                ],
-                "description": "update the NecesidadRechazada",
-                "operationId": "NecesidadRechazadaController.Put",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "description": "The id you want to update",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "body for NecesidadRechazada content",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.NecesidadRechazada"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "schema": {
-                            "$ref": "#/definitions/models.NecesidadRechazada"
-                        }
-                    },
-                    "403": {
-                        "description": ":id is not int"
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "necesidad_rechazada"
-                ],
-                "description": "delete the NecesidadRechazada",
-                "operationId": "NecesidadRechazadaController.Delete",
+                "description": "delete the NecesidadProcesoExterno",
+                "operationId": "NecesidadProcesoExternoController.Delete",
                 "parameters": [
                     {
                         "in": "path",
@@ -5663,342 +5575,6 @@
                 }
             }
         },
-        "/servicio/": {
-            "get": {
-                "tags": [
-                    "servicio"
-                ],
-                "description": "get Servicio",
-                "operationId": "ServicioController.Get All",
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "query",
-                        "description": "Filter. e.g. col1:v1,col2:v2 ...",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "fields",
-                        "description": "Fields returned. e.g. col1,col2 ...",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "sortby",
-                        "description": "Sorted-by fields. e.g. col1,col2 ...",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "order",
-                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "limit",
-                        "description": "Limit the size of result set. Must be an integer",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "offset",
-                        "description": "Start position of result set. Must be an integer",
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "schema": {
-                            "$ref": "#/definitions/models.Servicio"
-                        }
-                    },
-                    "403": {}
-                }
-            },
-            "post": {
-                "tags": [
-                    "servicio"
-                ],
-                "description": "create Servicio",
-                "operationId": "ServicioController.Post",
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "body for Servicio content",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.Servicio"
-                        }
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "{int} models.Servicio"
-                    },
-                    "403": {
-                        "description": "body is empty"
-                    }
-                }
-            }
-        },
-        "/servicio/{id}": {
-            "get": {
-                "tags": [
-                    "servicio"
-                ],
-                "description": "get Servicio by id",
-                "operationId": "ServicioController.Get One",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "description": "The key for staticblock",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "schema": {
-                            "$ref": "#/definitions/models.Servicio"
-                        }
-                    },
-                    "403": {
-                        "description": ":id is empty"
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "servicio"
-                ],
-                "description": "update the Servicio",
-                "operationId": "ServicioController.Put",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "description": "The id you want to update",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "body for Servicio content",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.Servicio"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "schema": {
-                            "$ref": "#/definitions/models.Servicio"
-                        }
-                    },
-                    "403": {
-                        "description": ":id is not int"
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "servicio"
-                ],
-                "description": "delete the Servicio",
-                "operationId": "ServicioController.Delete",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "description": "The id you want to delete",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "{string} delete success!"
-                    },
-                    "403": {
-                        "description": "id is empty"
-                    }
-                }
-            }
-        },
-        "/servicio_necesidad/": {
-            "get": {
-                "tags": [
-                    "servicio_necesidad"
-                ],
-                "description": "get ServicioNecesidad",
-                "operationId": "ServicioNecesidadController.Get All",
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "query",
-                        "description": "Filter. e.g. col1:v1,col2:v2 ...",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "fields",
-                        "description": "Fields returned. e.g. col1,col2 ...",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "sortby",
-                        "description": "Sorted-by fields. e.g. col1,col2 ...",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "order",
-                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "limit",
-                        "description": "Limit the size of result set. Must be an integer",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "offset",
-                        "description": "Start position of result set. Must be an integer",
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "schema": {
-                            "$ref": "#/definitions/models.ServicioNecesidad"
-                        }
-                    },
-                    "403": {}
-                }
-            },
-            "post": {
-                "tags": [
-                    "servicio_necesidad"
-                ],
-                "description": "create ServicioNecesidad",
-                "operationId": "ServicioNecesidadController.Post",
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "body for ServicioNecesidad content",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.ServicioNecesidad"
-                        }
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "{int} models.ServicioNecesidad"
-                    },
-                    "403": {
-                        "description": "body is empty"
-                    }
-                }
-            }
-        },
-        "/servicio_necesidad/{id}": {
-            "get": {
-                "tags": [
-                    "servicio_necesidad"
-                ],
-                "description": "get ServicioNecesidad by id",
-                "operationId": "ServicioNecesidadController.Get One",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "description": "The key for staticblock",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "schema": {
-                            "$ref": "#/definitions/models.ServicioNecesidad"
-                        }
-                    },
-                    "403": {
-                        "description": ":id is empty"
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "servicio_necesidad"
-                ],
-                "description": "update the ServicioNecesidad",
-                "operationId": "ServicioNecesidadController.Put",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "description": "The id you want to update",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "body for ServicioNecesidad content",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.ServicioNecesidad"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "schema": {
-                            "$ref": "#/definitions/models.ServicioNecesidad"
-                        }
-                    },
-                    "403": {
-                        "description": ":id is not int"
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "servicio_necesidad"
-                ],
-                "description": "delete the ServicioNecesidad",
-                "operationId": "ServicioNecesidadController.Delete",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "description": "The id you want to delete",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "{string} delete success!"
-                    },
-                    "403": {
-                        "description": "id is empty"
-                    }
-                }
-            }
-        },
         "/solicitud_disponibilidad/": {
             "get": {
                 "tags": [
@@ -6503,174 +6079,6 @@
                 }
             }
         },
-        "/supervisor_solicitud_necesidad/": {
-            "get": {
-                "tags": [
-                    "supervisor_solicitud_necesidad"
-                ],
-                "description": "get SupervisorSolicitudNecesidad",
-                "operationId": "SupervisorSolicitudNecesidadController.Get All",
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "query",
-                        "description": "Filter. e.g. col1:v1,col2:v2 ...",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "fields",
-                        "description": "Fields returned. e.g. col1,col2 ...",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "sortby",
-                        "description": "Sorted-by fields. e.g. col1,col2 ...",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "order",
-                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "limit",
-                        "description": "Limit the size of result set. Must be an integer",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "offset",
-                        "description": "Start position of result set. Must be an integer",
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "schema": {
-                            "$ref": "#/definitions/models.SupervisorSolicitudNecesidad"
-                        }
-                    },
-                    "403": {}
-                }
-            },
-            "post": {
-                "tags": [
-                    "supervisor_solicitud_necesidad"
-                ],
-                "description": "create SupervisorSolicitudNecesidad",
-                "operationId": "SupervisorSolicitudNecesidadController.Post",
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "body for SupervisorSolicitudNecesidad content",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.SupervisorSolicitudNecesidad"
-                        }
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "{int} models.SupervisorSolicitudNecesidad"
-                    },
-                    "403": {
-                        "description": "body is empty"
-                    }
-                }
-            }
-        },
-        "/supervisor_solicitud_necesidad/{id}": {
-            "get": {
-                "tags": [
-                    "supervisor_solicitud_necesidad"
-                ],
-                "description": "get SupervisorSolicitudNecesidad by id",
-                "operationId": "SupervisorSolicitudNecesidadController.Get One",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "description": "The key for staticblock",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "schema": {
-                            "$ref": "#/definitions/models.SupervisorSolicitudNecesidad"
-                        }
-                    },
-                    "403": {
-                        "description": ":id is empty"
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "supervisor_solicitud_necesidad"
-                ],
-                "description": "update the SupervisorSolicitudNecesidad",
-                "operationId": "SupervisorSolicitudNecesidadController.Put",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "description": "The id you want to update",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "body for SupervisorSolicitudNecesidad content",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.SupervisorSolicitudNecesidad"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "schema": {
-                            "$ref": "#/definitions/models.SupervisorSolicitudNecesidad"
-                        }
-                    },
-                    "403": {
-                        "description": ":id is not int"
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "supervisor_solicitud_necesidad"
-                ],
-                "description": "delete the SupervisorSolicitudNecesidad",
-                "operationId": "SupervisorSolicitudNecesidadController.Delete",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "description": "The id you want to delete",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "{string} delete success!"
-                    },
-                    "403": {
-                        "description": "id is empty"
-                    }
-                }
-            }
-        },
         "/tipo_contrato/": {
             "get": {
                 "tags": [
@@ -6839,6 +6247,510 @@
                 }
             }
         },
+        "/tipo_contrato_necesidad/": {
+            "get": {
+                "tags": [
+                    "tipo_contrato_necesidad"
+                ],
+                "description": "get TipoContratoNecesidad",
+                "operationId": "TipoContratoNecesidadController.Get All",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "query",
+                        "description": "Filter. e.g. col1:v1,col2:v2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "description": "Fields returned. e.g. col1,col2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "sortby",
+                        "description": "Sorted-by fields. e.g. col1,col2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "order",
+                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "description": "Limit the size of result set. Must be an integer",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "offset",
+                        "description": "Start position of result set. Must be an integer",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/models.TipoContratoNecesidad"
+                        }
+                    },
+                    "403": {}
+                }
+            },
+            "post": {
+                "tags": [
+                    "tipo_contrato_necesidad"
+                ],
+                "description": "create TipoContratoNecesidad",
+                "operationId": "TipoContratoNecesidadController.Post",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for TipoContratoNecesidad content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.TipoContratoNecesidad"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "{int} models.TipoContratoNecesidad"
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/tipo_contrato_necesidad/{id}": {
+            "get": {
+                "tags": [
+                    "tipo_contrato_necesidad"
+                ],
+                "description": "get TipoContratoNecesidad by id",
+                "operationId": "TipoContratoNecesidadController.Get One",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The key for staticblock",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/models.TipoContratoNecesidad"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is empty"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "tipo_contrato_necesidad"
+                ],
+                "description": "update the TipoContratoNecesidad",
+                "operationId": "TipoContratoNecesidadController.Put",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to update",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for TipoContratoNecesidad content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.TipoContratoNecesidad"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/models.TipoContratoNecesidad"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is not int"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "tipo_contrato_necesidad"
+                ],
+                "description": "delete the TipoContratoNecesidad",
+                "operationId": "TipoContratoNecesidadController.Delete",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{string} delete success!"
+                    },
+                    "403": {
+                        "description": "id is empty"
+                    }
+                }
+            }
+        },
+        "/tipo_financiacion_necesidad/": {
+            "get": {
+                "tags": [
+                    "tipo_financiacion_necesidad"
+                ],
+                "description": "get TipoFinanciacionNecesidad",
+                "operationId": "TipoFinanciacionNecesidadController.Get All",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "query",
+                        "description": "Filter. e.g. col1:v1,col2:v2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "description": "Fields returned. e.g. col1,col2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "sortby",
+                        "description": "Sorted-by fields. e.g. col1,col2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "order",
+                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "description": "Limit the size of result set. Must be an integer",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "offset",
+                        "description": "Start position of result set. Must be an integer",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/models.TipoFinanciacionNecesidad"
+                        }
+                    },
+                    "403": {}
+                }
+            },
+            "post": {
+                "tags": [
+                    "tipo_financiacion_necesidad"
+                ],
+                "description": "create TipoFinanciacionNecesidad",
+                "operationId": "TipoFinanciacionNecesidadController.Post",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for TipoFinanciacionNecesidad content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.TipoFinanciacionNecesidad"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "{int} models.TipoFinanciacionNecesidad"
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/tipo_financiacion_necesidad/{id}": {
+            "get": {
+                "tags": [
+                    "tipo_financiacion_necesidad"
+                ],
+                "description": "get TipoFinanciacionNecesidad by id",
+                "operationId": "TipoFinanciacionNecesidadController.Get One",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The key for staticblock",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/models.TipoFinanciacionNecesidad"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is empty"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "tipo_financiacion_necesidad"
+                ],
+                "description": "update the TipoFinanciacionNecesidad",
+                "operationId": "TipoFinanciacionNecesidadController.Put",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to update",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for TipoFinanciacionNecesidad content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.TipoFinanciacionNecesidad"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/models.TipoFinanciacionNecesidad"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is not int"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "tipo_financiacion_necesidad"
+                ],
+                "description": "delete the TipoFinanciacionNecesidad",
+                "operationId": "TipoFinanciacionNecesidadController.Delete",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{string} delete success!"
+                    },
+                    "403": {
+                        "description": "id is empty"
+                    }
+                }
+            }
+        },
+        "/tipo_necesidad/": {
+            "get": {
+                "tags": [
+                    "tipo_necesidad"
+                ],
+                "description": "get TipoNecesidad",
+                "operationId": "TipoNecesidadController.Get All",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "query",
+                        "description": "Filter. e.g. col1:v1,col2:v2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "description": "Fields returned. e.g. col1,col2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "sortby",
+                        "description": "Sorted-by fields. e.g. col1,col2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "order",
+                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "description": "Limit the size of result set. Must be an integer",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "offset",
+                        "description": "Start position of result set. Must be an integer",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/models.TipoNecesidad"
+                        }
+                    },
+                    "403": {}
+                }
+            },
+            "post": {
+                "tags": [
+                    "tipo_necesidad"
+                ],
+                "description": "create TipoNecesidad",
+                "operationId": "TipoNecesidadController.Post",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for TipoNecesidad content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.TipoNecesidad"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "{int} models.TipoNecesidad"
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/tipo_necesidad/{id}": {
+            "get": {
+                "tags": [
+                    "tipo_necesidad"
+                ],
+                "description": "get TipoNecesidad by id",
+                "operationId": "TipoNecesidadController.Get One",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The key for staticblock",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/models.TipoNecesidad"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is empty"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "tipo_necesidad"
+                ],
+                "description": "update the TipoNecesidad",
+                "operationId": "TipoNecesidadController.Put",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to update",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for TipoNecesidad content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.TipoNecesidad"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/models.TipoNecesidad"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is not int"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "tipo_necesidad"
+                ],
+                "description": "delete the TipoNecesidad",
+                "operationId": "TipoNecesidadController.Delete",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{string} delete success!"
+                    },
+                    "403": {
+                        "description": "id is empty"
+                    }
+                }
+            }
+        },
         "/tipo_resolucion/": {
             "get": {
                 "tags": [
@@ -6988,174 +6900,6 @@
                 ],
                 "description": "delete the TipoResolucion",
                 "operationId": "TipoResolucionController.Delete",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "description": "The id you want to delete",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "{string} delete success!"
-                    },
-                    "403": {
-                        "description": "id is empty"
-                    }
-                }
-            }
-        },
-        "/tipo_rubro/": {
-            "get": {
-                "tags": [
-                    "tipo_rubro"
-                ],
-                "description": "get TipoRubro",
-                "operationId": "TipoRubroController.Get All",
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "query",
-                        "description": "Filter. e.g. col1:v1,col2:v2 ...",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "fields",
-                        "description": "Fields returned. e.g. col1,col2 ...",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "sortby",
-                        "description": "Sorted-by fields. e.g. col1,col2 ...",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "order",
-                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "limit",
-                        "description": "Limit the size of result set. Must be an integer",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "offset",
-                        "description": "Start position of result set. Must be an integer",
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "schema": {
-                            "$ref": "#/definitions/models.TipoRubro"
-                        }
-                    },
-                    "403": {}
-                }
-            },
-            "post": {
-                "tags": [
-                    "tipo_rubro"
-                ],
-                "description": "create TipoRubro",
-                "operationId": "TipoRubroController.Post",
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "body for TipoRubro content",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.TipoRubro"
-                        }
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "{int} models.TipoRubro"
-                    },
-                    "403": {
-                        "description": "body is empty"
-                    }
-                }
-            }
-        },
-        "/tipo_rubro/{id}": {
-            "get": {
-                "tags": [
-                    "tipo_rubro"
-                ],
-                "description": "get TipoRubro by id",
-                "operationId": "TipoRubroController.Get One",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "description": "The key for staticblock",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "schema": {
-                            "$ref": "#/definitions/models.TipoRubro"
-                        }
-                    },
-                    "403": {
-                        "description": ":id is empty"
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "tipo_rubro"
-                ],
-                "description": "update the TipoRubro",
-                "operationId": "TipoRubroController.Put",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "description": "The id you want to update",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "body for TipoRubro content",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.TipoRubro"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "schema": {
-                            "$ref": "#/definitions/models.TipoRubro"
-                        }
-                    },
-                    "403": {
-                        "description": ":id is not int"
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "tipo_rubro"
-                ],
-                "description": "delete the TipoRubro",
-                "operationId": "TipoRubroController.Delete",
                 "parameters": [
                     {
                         "in": "path",
@@ -7483,27 +7227,6 @@
                 "Id": {
                     "type": "integer",
                     "format": "int64"
-                },
-                "Necesidad": {
-                    "$ref": "#/definitions/models.Necesidad"
-                }
-            }
-        },
-        "models.ActividadSolicitudNecesidad": {
-            "title": "ActividadSolicitudNecesidad",
-            "type": "object",
-            "properties": {
-                "Actividad": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "Id": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "MontoParcial": {
-                    "type": "number",
-                    "format": "double"
                 },
                 "Necesidad": {
                     "$ref": "#/definitions/models.Necesidad"
@@ -7886,6 +7609,31 @@
                 }
             }
         },
+        "models.DetalleServicioNecesidad": {
+            "title": "DetalleServicioNecesidad",
+            "type": "object",
+            "properties": {
+                "Cantidad": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "Id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "Necesidad": {
+                    "$ref": "#/definitions/models.Necesidad"
+                },
+                "NucleoConocimiento": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "Perfil": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
         "models.DisponibilidadApropiacionSolicitudRp": {
             "title": "DisponibilidadApropiacionSolicitudRp",
             "type": "object",
@@ -7931,7 +7679,7 @@
                     "type": "integer",
                     "format": "int64"
                 },
-                "SolicitudNecesidad": {
+                "Necesidad": {
                     "$ref": "#/definitions/models.Necesidad"
                 },
                 "Unidad": {
@@ -7965,18 +7713,23 @@
             "title": "EstadoNecesidad",
             "type": "object",
             "properties": {
+                "CodigoAbreviacion": {
+                    "type": "string"
+                },
                 "Descripcion": {
                     "type": "string"
                 },
-                "FechaRegistro": {
-                    "type": "string",
-                    "format": "string"
+                "Estado": {
+                    "type": "boolean"
                 },
                 "Id": {
                     "type": "integer",
                     "format": "int64"
                 },
                 "Nombre": {
+                    "type": "string"
+                },
+                "NumeroOrden": {
                     "type": "string"
                 }
             }
@@ -8006,7 +7759,7 @@
                     "type": "integer",
                     "format": "int64"
                 },
-                "FuenteFinanciacion": {
+                "FuenteFinanciamiento": {
                     "type": "integer",
                     "format": "int64"
                 },
@@ -8018,7 +7771,7 @@
                     "type": "number",
                     "format": "double"
                 },
-                "SolicitudNecesidad": {
+                "Necesidad": {
                     "$ref": "#/definitions/models.Necesidad"
                 }
             }
@@ -8082,14 +7835,23 @@
             "title": "ModalidadSeleccion",
             "type": "object",
             "properties": {
+                "CodigoAbreviacion": {
+                    "type": "string"
+                },
                 "Descripcion": {
                     "type": "string"
+                },
+                "Estado": {
+                    "type": "boolean"
                 },
                 "Id": {
                     "type": "integer",
                     "format": "int64"
                 },
                 "Nombre": {
+                    "type": "string"
+                },
+                "NumeroOrden": {
                     "type": "string"
                 }
             }
@@ -8104,11 +7866,17 @@
                 "AnalisisRiesgo": {
                     "type": "string"
                 },
+                "DependenciaReversa": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.DependenciaNecesidad"
+                    }
+                },
                 "DiasDuracion": {
                     "type": "number",
                     "format": "double"
                 },
-                "Estado": {
+                "EstadoNecesidad": {
                     "$ref": "#/definitions/models.EstadoNecesidad"
                 },
                 "EstudioMercado": {
@@ -8122,11 +7890,23 @@
                     "type": "string",
                     "format": "string"
                 },
+                "FuenteReversa": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.FuenteFinanciacionRubroNecesidad"
+                    }
+                },
                 "Id": {
                     "type": "integer",
                     "format": "int64"
                 },
                 "Justificacion": {
+                    "type": "string"
+                },
+                "JustificacionAnulacion": {
+                    "type": "string"
+                },
+                "JustificacionRechazo": {
                     "type": "string"
                 },
                 "ModalidadSeleccion": {
@@ -8143,19 +7923,22 @@
                 "Objeto": {
                     "type": "string"
                 },
-                "OtroSi": {
-                    "type": "integer",
-                    "format": "int64"
-                },
                 "PlanAnualAdquisiciones": {
                     "type": "integer",
                     "format": "int64"
                 },
-                "Servicio": {
-                    "$ref": "#/definitions/models.Servicio"
+                "Supervisor": {
+                    "type": "integer",
+                    "format": "int64"
                 },
-                "TipoRubro": {
-                    "$ref": "#/definitions/models.TipoRubro"
+                "TipoContratoNecesidad": {
+                    "$ref": "#/definitions/models.TipoContratoNecesidad"
+                },
+                "TipoFinanciacionNecesidad": {
+                    "$ref": "#/definitions/models.TipoFinanciacionNecesidad"
+                },
+                "TipoNecesidad": {
+                    "$ref": "#/definitions/models.TipoNecesidad"
                 },
                 "UnicoPago": {
                     "type": "boolean"
@@ -8174,40 +7957,23 @@
                 }
             }
         },
-        "models.NecesidadOtroSi": {
-            "title": "NecesidadOtroSi",
+        "models.NecesidadProcesoExterno": {
+            "title": "NecesidadProcesoExterno",
             "type": "object",
             "properties": {
-                "Contrato": {
-                    "type": "string"
-                },
                 "Id": {
                     "type": "integer",
                     "format": "int64"
-                },
-                "Vigencia": {
-                    "type": "integer",
-                    "format": "int64"
-                }
-            }
-        },
-        "models.NecesidadRechazada": {
-            "title": "NecesidadRechazada",
-            "type": "object",
-            "properties": {
-                "Fecha": {
-                    "type": "string",
-                    "format": "string"
-                },
-                "Id": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "Justificacion": {
-                    "type": "string"
                 },
                 "Necesidad": {
                     "$ref": "#/definitions/models.Necesidad"
+                },
+                "ProcesoExterno": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "TipoNecesidad": {
+                    "$ref": "#/definitions/models.TipoNecesidad"
                 }
             }
         },
@@ -8445,7 +8211,7 @@
                     "type": "boolean"
                 },
                 "FechaExpedicion": {
-                    "$ref": "string"
+                    "$ref": "#/definitions/time.Time"
                 },
                 "FechaRegistro": {
                     "type": "string",
@@ -8552,47 +8318,6 @@
                 }
             }
         },
-        "models.Servicio": {
-            "title": "Servicio",
-            "type": "object",
-            "properties": {
-                "Descripcion": {
-                    "type": "string"
-                },
-                "Id": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "Nombre": {
-                    "type": "string"
-                }
-            }
-        },
-        "models.ServicioNecesidad": {
-            "title": "ServicioNecesidad",
-            "type": "object",
-            "properties": {
-                "Cantidad": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "Id": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "Necesidad": {
-                    "$ref": "#/definitions/models.Necesidad"
-                },
-                "Perfil": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "SniesNucleo": {
-                    "type": "integer",
-                    "format": "int64"
-                }
-            }
-        },
         "models.SolicitudDisponibilidad": {
             "title": "SolicitudDisponibilidad",
             "type": "object",
@@ -8651,6 +8376,9 @@
                     "type": "integer",
                     "format": "int64"
                 },
+                "Masivo": {
+                    "type": "boolean"
+                },
                 "NumeroContrato": {
                     "type": "string"
                 },
@@ -8700,30 +8428,6 @@
                 }
             }
         },
-        "models.SupervisorSolicitudNecesidad": {
-            "title": "SupervisorSolicitudNecesidad",
-            "type": "object",
-            "properties": {
-                "Estado": {
-                    "type": "string"
-                },
-                "FechaAsginacion": {
-                    "type": "string",
-                    "format": "string"
-                },
-                "Funcionario": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "Id": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "SolicitudNecesidad": {
-                    "$ref": "#/definitions/models.Necesidad"
-                }
-            }
-        },
         "models.TipoContrato": {
             "title": "TipoContrato",
             "type": "object",
@@ -8744,6 +8448,81 @@
                 }
             }
         },
+        "models.TipoContratoNecesidad": {
+            "title": "TipoContratoNecesidad",
+            "type": "object",
+            "properties": {
+                "CodigoAbreviacion": {
+                    "type": "string"
+                },
+                "Descripcion": {
+                    "type": "string"
+                },
+                "Estado": {
+                    "type": "boolean"
+                },
+                "Id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "Nombre": {
+                    "type": "string"
+                },
+                "NumeroOrden": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.TipoFinanciacionNecesidad": {
+            "title": "TipoFinanciacionNecesidad",
+            "type": "object",
+            "properties": {
+                "CodigoAbreviacion": {
+                    "type": "string"
+                },
+                "Descripcion": {
+                    "type": "string"
+                },
+                "Estado": {
+                    "type": "boolean"
+                },
+                "Id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "Nombre": {
+                    "type": "string"
+                },
+                "NumeroOrden": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.TipoNecesidad": {
+            "title": "TipoNecesidad",
+            "type": "object",
+            "properties": {
+                "CodigoAbreviacion": {
+                    "type": "string"
+                },
+                "Descripcion": {
+                    "type": "string"
+                },
+                "Estado": {
+                    "type": "boolean"
+                },
+                "Id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "Nombre": {
+                    "type": "string"
+                },
+                "NumeroOrden": {
+                    "type": "string"
+                }
+            }
+        },
         "models.TipoResolucion": {
             "title": "TipoResolucion",
             "type": "object",
@@ -8756,22 +8535,6 @@
                     "format": "int64"
                 },
                 "NombreTipoResolucion": {
-                    "type": "string"
-                }
-            }
-        },
-        "models.TipoRubro": {
-            "title": "TipoRubro",
-            "type": "object",
-            "properties": {
-                "Descripcion": {
-                    "type": "string"
-                },
-                "Id": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "Nombre": {
                     "type": "string"
                 }
             }
@@ -8810,6 +8573,9 @@
                 "DependenciaNecesidad": {
                     "$ref": "#/definitions/models.DependenciaNecesidad"
                 },
+                "DetalleServicioNecesidad": {
+                    "$ref": "#/definitions/models.DetalleServicioNecesidad"
+                },
                 "Especificacion": {
                     "type": "array",
                     "items": {
@@ -8830,12 +8596,6 @@
                 },
                 "Necesidad": {
                     "$ref": "#/definitions/models.Necesidad"
-                },
-                "ServicioNecesidad": {
-                    "$ref": "#/definitions/models.ServicioNecesidad"
-                },
-                "SupervisorSolicitudNecesidad": {
-                    "$ref": "#/definitions/models.SupervisorSolicitudNecesidad"
                 }
             }
         },
@@ -8900,10 +8660,6 @@
             "description": " ContratoGeneralController operations for ContratoGeneral\n"
         },
         {
-            "name": "necesidad_rechazada",
-            "description": "NecesidadRechazadaController operations for NecesidadRechazada\n"
-        },
-        {
             "name": "vigencia_contrato",
             "description": " VigenciaContratoController operations for VigenciaContrato\n"
         },
@@ -8912,8 +8668,8 @@
             "description": "ContratoDisponibilidadController operations for ContratoDisponibilidad\n"
         },
         {
-            "name": "servicio_necesidad",
-            "description": "ServicioNecesidadController operations for ServicioNecesidad\n"
+            "name": "detalle_servicio_necesidad",
+            "description": "DetalleServicioNecesidadController operations for DetalleServicioNecesidad\n"
         },
         {
             "name": "tipo_resolucion",
@@ -8922,10 +8678,6 @@
         {
             "name": "dedicacion",
             "description": "DedicacionController operations for Dedicacion\n"
-        },
-        {
-            "name": "actividad_solicitud_necesidad",
-            "description": "ActividadSolicitudNecesidadController operations for ActividadSolicitudNecesidad\n"
         },
         {
             "name": "fuente_financiacion_rubro_necesidad",
@@ -8980,8 +8732,8 @@
             "description": "RelacionParametroController operations for RelacionParametro\n"
         },
         {
-            "name": "tipo_rubro",
-            "description": "TipoRubroController operations for TipoRubro\n"
+            "name": "tipo_financiacion_necesidad",
+            "description": "TipoFinanciacionNecesidadController operations for TipoFinanciacionNecesidad\n"
         },
         {
             "name": "actividad_economica_necesidad",
@@ -8992,8 +8744,8 @@
             "description": "EspecificacionTecnicaController operations for EspecificacionTecnica\n"
         },
         {
-            "name": "servicio",
-            "description": "ServicioController operations for Servicio\n"
+            "name": "tipo_contrato_necesidad",
+            "description": "TipoContratoNecesidadController operations for TipoContratoNecesidad\n"
         },
         {
             "name": "actividad_especifica",
@@ -9004,20 +8756,12 @@
             "description": "EstadoNecesidadController operations for EstadoNecesidad\n"
         },
         {
-            "name": "necesidad_otro_si",
-            "description": "NecesidadOtroSiController operations for NecesidadOtroSi\n"
-        },
-        {
             "name": "modalidad_seleccion",
             "description": "ModalidadSeleccionController operations for ModalidadSeleccion\n"
         },
         {
             "name": "requisito_minimo",
             "description": "RequisitoMinimoController operations for RequisitoMinimo\n"
-        },
-        {
-            "name": "supervisor_solicitud_necesidad",
-            "description": "SupervisorSolicitudNecesidadController operations for SupervisorSolicitudNecesidad\n"
         },
         {
             "name": "lugar_ejecucion",
@@ -9086,6 +8830,14 @@
         {
             "name": "resolucion",
             "description": "ResolucionController oprations for Resolucion\n"
+        },
+        {
+            "name": "tipo_necesidad",
+            "description": "TipoNecesidadController operations for TipoNecesidad\n"
+        },
+        {
+            "name": "necesidad_proceso_externo",
+            "description": "NecesidadProcesoExternoController operations for NecesidadProcesoExterno\n"
         }
     ]
 }

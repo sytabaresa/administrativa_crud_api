@@ -9,45 +9,47 @@ import (
 	"github.com/astaxie/beego/orm"
 )
 
-type TipoRubro struct {
-	Id          int    `orm:"column(id);pk;auto"`
-	Nombre      string `orm:"column(nombre)"`
-	Descripcion string `orm:"column(descripcion);null"`
+type DetalleServicioNecesidad struct {
+	Id                 int        `orm:"column(id);pk;auto"`
+	Perfil             int        `orm:"column(perfil)"`
+	NucleoConocimiento int        `orm:"column(nucleo_conocimiento)"`
+	Cantidad           int        `orm:"column(cantidad)"`
+	Necesidad          *Necesidad `orm:"column(necesidad);rel(fk)"`
 }
 
-func (t *TipoRubro) TableName() string {
-	return "tipo_rubro"
+func (t *DetalleServicioNecesidad) TableName() string {
+	return "detalle_servicio_necesidad"
 }
 
 func init() {
-	orm.RegisterModel(new(TipoRubro))
+	orm.RegisterModel(new(DetalleServicioNecesidad))
 }
 
-// AddTipoRubro insert a new TipoRubro into database and returns
+// AddDetalleServicioNecesidad insert a new DetalleServicioNecesidad into database and returns
 // last inserted Id on success.
-func AddTipoRubro(m *TipoRubro) (id int64, err error) {
+func AddDetalleServicioNecesidad(m *DetalleServicioNecesidad) (id int64, err error) {
 	o := orm.NewOrm()
 	id, err = o.Insert(m)
 	return
 }
 
-// GetTipoRubroById retrieves TipoRubro by Id. Returns error if
+// GetDetalleServicioNecesidadById retrieves DetalleServicioNecesidad by Id. Returns error if
 // Id doesn't exist
-func GetTipoRubroById(id int) (v *TipoRubro, err error) {
+func GetDetalleServicioNecesidadById(id int) (v *DetalleServicioNecesidad, err error) {
 	o := orm.NewOrm()
-	v = &TipoRubro{Id: id}
+	v = &DetalleServicioNecesidad{Id: id}
 	if err = o.Read(v); err == nil {
 		return v, nil
 	}
 	return nil, err
 }
 
-// GetAllTipoRubro retrieves all TipoRubro matches certain condition. Returns empty list if
+// GetAllDetalleServicioNecesidad retrieves all DetalleServicioNecesidad matches certain condition. Returns empty list if
 // no records exist
-func GetAllTipoRubro(query map[string]string, fields []string, sortby []string, order []string,
+func GetAllDetalleServicioNecesidad(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(TipoRubro)).RelatedSel(5)
+	qs := o.QueryTable(new(DetalleServicioNecesidad)).RelatedSel(5)
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute
@@ -97,7 +99,7 @@ func GetAllTipoRubro(query map[string]string, fields []string, sortby []string, 
 		}
 	}
 
-	var l []TipoRubro
+	var l []DetalleServicioNecesidad
 	qs = qs.OrderBy(sortFields...)
 	if _, err = qs.Limit(limit, offset).All(&l, fields...); err == nil {
 		if len(fields) == 0 {
@@ -120,11 +122,11 @@ func GetAllTipoRubro(query map[string]string, fields []string, sortby []string, 
 	return nil, err
 }
 
-// UpdateTipoRubro updates TipoRubro by Id and returns error if
+// UpdateDetalleServicioNecesidad updates DetalleServicioNecesidad by Id and returns error if
 // the record to be updated doesn't exist
-func UpdateTipoRubroById(m *TipoRubro) (err error) {
+func UpdateDetalleServicioNecesidadById(m *DetalleServicioNecesidad) (err error) {
 	o := orm.NewOrm()
-	v := TipoRubro{Id: m.Id}
+	v := DetalleServicioNecesidad{Id: m.Id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
@@ -135,15 +137,15 @@ func UpdateTipoRubroById(m *TipoRubro) (err error) {
 	return
 }
 
-// DeleteTipoRubro deletes TipoRubro by Id and returns error if
+// DeleteDetalleServicioNecesidad deletes DetalleServicioNecesidad by Id and returns error if
 // the record to be deleted doesn't exist
-func DeleteTipoRubro(id int) (err error) {
+func DeleteDetalleServicioNecesidad(id int) (err error) {
 	o := orm.NewOrm()
-	v := TipoRubro{Id: id}
+	v := DetalleServicioNecesidad{Id: id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
-		if num, err = o.Delete(&TipoRubro{Id: id}); err == nil {
+		if num, err = o.Delete(&DetalleServicioNecesidad{Id: id}); err == nil {
 			fmt.Println("Number of records deleted in database:", num)
 		}
 	}

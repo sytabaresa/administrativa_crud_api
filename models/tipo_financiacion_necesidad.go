@@ -9,45 +9,48 @@ import (
 	"github.com/astaxie/beego/orm"
 )
 
-type NecesidadOtroSi struct {
-	Id       int    `orm:"column(id);pk;auto"`
-	Contrato string `orm:"column(contrato)"`
-	Vigencia int    `orm:"column(vigencia)"`
+type TipoFinanciacionNecesidad struct {
+	Id                int    `orm:"column(id);pk;auto"`
+	Nombre            string `orm:"column(nombre)"`
+	Descripcion       string `orm:"column(descripcion);null"`
+	CodigoAbreviacion string `orm:"column(codigo_abreviacion);null"`
+	Estado            bool   `orm:"column(estado)"`
+	NumeroOrden       string `orm:"column(numero_orden);null"`
 }
 
-func (t *NecesidadOtroSi) TableName() string {
-	return "necesidad_otro_si"
+func (t *TipoFinanciacionNecesidad) TableName() string {
+	return "tipo_financiacion_necesidad"
 }
 
 func init() {
-	orm.RegisterModel(new(NecesidadOtroSi))
+	orm.RegisterModel(new(TipoFinanciacionNecesidad))
 }
 
-// AddNecesidadOtroSi insert a new NecesidadOtroSi into database and returns
+// AddTipoFinanciacionNecesidad insert a new TipoFinanciacionNecesidad into database and returns
 // last inserted Id on success.
-func AddNecesidadOtroSi(m *NecesidadOtroSi) (id int64, err error) {
+func AddTipoFinanciacionNecesidad(m *TipoFinanciacionNecesidad) (id int64, err error) {
 	o := orm.NewOrm()
 	id, err = o.Insert(m)
 	return
 }
 
-// GetNecesidadOtroSiById retrieves NecesidadOtroSi by Id. Returns error if
+// GetTipoFinanciacionNecesidadById retrieves TipoFinanciacionNecesidad by Id. Returns error if
 // Id doesn't exist
-func GetNecesidadOtroSiById(id int) (v *NecesidadOtroSi, err error) {
+func GetTipoFinanciacionNecesidadById(id int) (v *TipoFinanciacionNecesidad, err error) {
 	o := orm.NewOrm()
-	v = &NecesidadOtroSi{Id: id}
+	v = &TipoFinanciacionNecesidad{Id: id}
 	if err = o.Read(v); err == nil {
 		return v, nil
 	}
 	return nil, err
 }
 
-// GetAllNecesidadOtroSi retrieves all NecesidadOtroSi matches certain condition. Returns empty list if
+// GetAllTipoFinanciacionNecesidad retrieves all TipoFinanciacionNecesidad matches certain condition. Returns empty list if
 // no records exist
-func GetAllNecesidadOtroSi(query map[string]string, fields []string, sortby []string, order []string,
+func GetAllTipoFinanciacionNecesidad(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(NecesidadOtroSi)).RelatedSel(5)
+	qs := o.QueryTable(new(TipoFinanciacionNecesidad)).RelatedSel(5)
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute
@@ -97,7 +100,7 @@ func GetAllNecesidadOtroSi(query map[string]string, fields []string, sortby []st
 		}
 	}
 
-	var l []NecesidadOtroSi
+	var l []TipoFinanciacionNecesidad
 	qs = qs.OrderBy(sortFields...)
 	if _, err = qs.Limit(limit, offset).All(&l, fields...); err == nil {
 		if len(fields) == 0 {
@@ -120,11 +123,11 @@ func GetAllNecesidadOtroSi(query map[string]string, fields []string, sortby []st
 	return nil, err
 }
 
-// UpdateNecesidadOtroSi updates NecesidadOtroSi by Id and returns error if
+// UpdateTipoFinanciacionNecesidad updates TipoFinanciacionNecesidad by Id and returns error if
 // the record to be updated doesn't exist
-func UpdateNecesidadOtroSiById(m *NecesidadOtroSi) (err error) {
+func UpdateTipoFinanciacionNecesidadById(m *TipoFinanciacionNecesidad) (err error) {
 	o := orm.NewOrm()
-	v := NecesidadOtroSi{Id: m.Id}
+	v := TipoFinanciacionNecesidad{Id: m.Id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
@@ -135,15 +138,15 @@ func UpdateNecesidadOtroSiById(m *NecesidadOtroSi) (err error) {
 	return
 }
 
-// DeleteNecesidadOtroSi deletes NecesidadOtroSi by Id and returns error if
+// DeleteTipoFinanciacionNecesidad deletes TipoFinanciacionNecesidad by Id and returns error if
 // the record to be deleted doesn't exist
-func DeleteNecesidadOtroSi(id int) (err error) {
+func DeleteTipoFinanciacionNecesidad(id int) (err error) {
 	o := orm.NewOrm()
-	v := NecesidadOtroSi{Id: id}
+	v := TipoFinanciacionNecesidad{Id: id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
-		if num, err = o.Delete(&NecesidadOtroSi{Id: id}); err == nil {
+		if num, err = o.Delete(&TipoFinanciacionNecesidad{Id: id}); err == nil {
 			fmt.Println("Number of records deleted in database:", num)
 		}
 	}

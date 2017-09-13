@@ -9,46 +9,46 @@ import (
 	"github.com/astaxie/beego/orm"
 )
 
-type ActividadSolicitudNecesidad struct {
-	Id           int                      `orm:"column(id);pk;auto"`
-	Actividad    int					  `orm:"column(actividad)"`
-	MontoParcial float64                  `orm:"column(monto_parcial)"`
-	Necesidad    *Necesidad               `orm:"column(necesidad);rel(fk)"`
+type NecesidadProcesoExterno struct {
+	Id             int            `orm:"column(id);pk;auto"`
+	Necesidad      *Necesidad     `orm:"column(necesidad);rel(fk)"`
+	ProcesoExterno int            `orm:"column(proceso_externo)"`
+	TipoNecesidad  *TipoNecesidad `orm:"column(tipo_necesidad);rel(fk)"`
 }
 
-func (t *ActividadSolicitudNecesidad) TableName() string {
-	return "actividad_solicitud_necesidad"
+func (t *NecesidadProcesoExterno) TableName() string {
+	return "necesidad_proceso_externo"
 }
 
 func init() {
-	orm.RegisterModel(new(ActividadSolicitudNecesidad))
+	orm.RegisterModel(new(NecesidadProcesoExterno))
 }
 
-// AddActividadSolicitudNecesidad insert a new ActividadSolicitudNecesidad into database and returns
+// AddNecesidadProcesoExterno insert a new NecesidadProcesoExterno into database and returns
 // last inserted Id on success.
-func AddActividadSolicitudNecesidad(m *ActividadSolicitudNecesidad) (id int64, err error) {
+func AddNecesidadProcesoExterno(m *NecesidadProcesoExterno) (id int64, err error) {
 	o := orm.NewOrm()
 	id, err = o.Insert(m)
 	return
 }
 
-// GetActividadSolicitudNecesidadById retrieves ActividadSolicitudNecesidad by Id. Returns error if
+// GetNecesidadProcesoExternoById retrieves NecesidadProcesoExterno by Id. Returns error if
 // Id doesn't exist
-func GetActividadSolicitudNecesidadById(id int) (v *ActividadSolicitudNecesidad, err error) {
+func GetNecesidadProcesoExternoById(id int) (v *NecesidadProcesoExterno, err error) {
 	o := orm.NewOrm()
-	v = &ActividadSolicitudNecesidad{Id: id}
+	v = &NecesidadProcesoExterno{Id: id}
 	if err = o.Read(v); err == nil {
 		return v, nil
 	}
 	return nil, err
 }
 
-// GetAllActividadSolicitudNecesidad retrieves all ActividadSolicitudNecesidad matches certain condition. Returns empty list if
+// GetAllNecesidadProcesoExterno retrieves all NecesidadProcesoExterno matches certain condition. Returns empty list if
 // no records exist
-func GetAllActividadSolicitudNecesidad(query map[string]string, fields []string, sortby []string, order []string,
+func GetAllNecesidadProcesoExterno(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(ActividadSolicitudNecesidad)).RelatedSel(5)
+	qs := o.QueryTable(new(NecesidadProcesoExterno)).RelatedSel(5)
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute
@@ -98,7 +98,7 @@ func GetAllActividadSolicitudNecesidad(query map[string]string, fields []string,
 		}
 	}
 
-	var l []ActividadSolicitudNecesidad
+	var l []NecesidadProcesoExterno
 	qs = qs.OrderBy(sortFields...)
 	if _, err = qs.Limit(limit, offset).All(&l, fields...); err == nil {
 		if len(fields) == 0 {
@@ -121,11 +121,11 @@ func GetAllActividadSolicitudNecesidad(query map[string]string, fields []string,
 	return nil, err
 }
 
-// UpdateActividadSolicitudNecesidad updates ActividadSolicitudNecesidad by Id and returns error if
+// UpdateNecesidadProcesoExterno updates NecesidadProcesoExterno by Id and returns error if
 // the record to be updated doesn't exist
-func UpdateActividadSolicitudNecesidadById(m *ActividadSolicitudNecesidad) (err error) {
+func UpdateNecesidadProcesoExternoById(m *NecesidadProcesoExterno) (err error) {
 	o := orm.NewOrm()
-	v := ActividadSolicitudNecesidad{Id: m.Id}
+	v := NecesidadProcesoExterno{Id: m.Id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
@@ -136,15 +136,15 @@ func UpdateActividadSolicitudNecesidadById(m *ActividadSolicitudNecesidad) (err 
 	return
 }
 
-// DeleteActividadSolicitudNecesidad deletes ActividadSolicitudNecesidad by Id and returns error if
+// DeleteNecesidadProcesoExterno deletes NecesidadProcesoExterno by Id and returns error if
 // the record to be deleted doesn't exist
-func DeleteActividadSolicitudNecesidad(id int) (err error) {
+func DeleteNecesidadProcesoExterno(id int) (err error) {
 	o := orm.NewOrm()
-	v := ActividadSolicitudNecesidad{Id: id}
+	v := NecesidadProcesoExterno{Id: id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
-		if num, err = o.Delete(&ActividadSolicitudNecesidad{Id: id}); err == nil {
+		if num, err = o.Delete(&NecesidadProcesoExterno{Id: id}); err == nil {
 			fmt.Println("Number of records deleted in database:", num)
 		}
 	}

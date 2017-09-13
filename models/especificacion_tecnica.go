@@ -10,14 +10,14 @@ import (
 )
 
 type EspecificacionTecnica struct {
-	Id                 int        `orm:"column(id);pk;auto"`
-	Catalogo           int        `orm:"column(catalogo)"`
-	SolicitudNecesidad *Necesidad `orm:"column(solicitud_necesidad);rel(fk)"`
-	Elemento           string     `orm:"column(elemento);null"`
-	Unidad             int        `orm:"column(unidad)"`
-	Iva                int        `orm:"column(iva)"`
-	Valor              int        `orm:"column(valor)"`
-	Cantidad           int        `orm:"column(cantidad)"`
+	Id        int        `orm:"column(id);pk;auto"`
+	Catalogo  int        `orm:"column(catalogo)"`
+	Necesidad *Necesidad `orm:"column(necesidad);rel(fk)"`
+	Elemento  string     `orm:"column(elemento);null"`
+	Unidad    int        `orm:"column(unidad)"`
+	Iva       int        `orm:"column(iva)"`
+	Valor     int        `orm:"column(valor)"`
+	Cantidad  int        `orm:"column(cantidad)"`
 }
 
 func (t *EspecificacionTecnica) TableName() string {

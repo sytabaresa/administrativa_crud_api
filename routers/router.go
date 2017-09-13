@@ -22,12 +22,6 @@ func init() {
 			),
 		),
 
-		beego.NSNamespace("/necesidad_rechazada",
-			beego.NSInclude(
-				&controllers.NecesidadRechazadaController{},
-			),
-		),
-
 		beego.NSNamespace("/vigencia_contrato",
 			beego.NSInclude(
 				&controllers.VigenciaContratoController{},
@@ -40,9 +34,9 @@ func init() {
 			),
 		),
 
-		beego.NSNamespace("/servicio_necesidad",
+		beego.NSNamespace("/detalle_servicio_necesidad",
 			beego.NSInclude(
-				&controllers.ServicioNecesidadController{},
+				&controllers.DetalleServicioNecesidadController{},
 			),
 		),
 
@@ -55,12 +49,6 @@ func init() {
 		beego.NSNamespace("/dedicacion",
 			beego.NSInclude(
 				&controllers.DedicacionController{},
-			),
-		),
-
-		beego.NSNamespace("/actividad_solicitud_necesidad",
-			beego.NSInclude(
-				&controllers.ActividadSolicitudNecesidadController{},
 			),
 		),
 
@@ -142,9 +130,9 @@ func init() {
 			),
 		),
 
-		beego.NSNamespace("/tipo_rubro",
+		beego.NSNamespace("/tipo_financiacion_necesidad",
 			beego.NSInclude(
-				&controllers.TipoRubroController{},
+				&controllers.TipoFinanciacionNecesidadController{},
 			),
 		),
 
@@ -160,9 +148,9 @@ func init() {
 			),
 		),
 
-		beego.NSNamespace("/servicio",
+		beego.NSNamespace("/tipo_contrato_necesidad",
 			beego.NSInclude(
-				&controllers.ServicioController{},
+				&controllers.TipoContratoNecesidadController{},
 			),
 		),
 
@@ -178,12 +166,6 @@ func init() {
 			),
 		),
 
-		beego.NSNamespace("/necesidad_otro_si",
-			beego.NSInclude(
-				&controllers.NecesidadOtroSiController{},
-			),
-		),
-
 		beego.NSNamespace("/modalidad_seleccion",
 			beego.NSInclude(
 				&controllers.ModalidadSeleccionController{},
@@ -193,12 +175,6 @@ func init() {
 		beego.NSNamespace("/requisito_minimo",
 			beego.NSInclude(
 				&controllers.RequisitoMinimoController{},
-			),
-		),
-
-		beego.NSNamespace("/supervisor_solicitud_necesidad",
-			beego.NSInclude(
-				&controllers.SupervisorSolicitudNecesidadController{},
 			),
 		),
 
@@ -319,6 +295,18 @@ func init() {
 		beego.NSNamespace("/resolucion",
 			beego.NSInclude(
 				&controllers.ResolucionController{},
+			),
+		),
+
+		beego.NSNamespace("/tipo_necesidad",
+			beego.NSInclude(
+				&controllers.TipoNecesidadController{},
+			),
+		),
+
+		beego.NSNamespace("/necesidad_proceso_externo",
+			beego.NSInclude(
+				&controllers.NecesidadProcesoExternoController{},
 			),
 		),
 

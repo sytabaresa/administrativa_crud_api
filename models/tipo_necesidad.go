@@ -5,63 +5,52 @@ import (
 	"fmt"
 	"reflect"
 	"strings"
-	"time"
 
 	"github.com/astaxie/beego/orm"
 )
 
-type NecesidadRechazada struct {
-	Id            int        `orm:"column(id);pk;auto"`
-	Necesidad     *Necesidad `orm:"column(necesidad);rel(fk)"`
-	Justificacion string     `orm:"column(justificacion)"`
-	Fecha         time.Time  `orm:"column(fecha);type(date)"`
+type TipoNecesidad struct {
+	Id                int    `orm:"column(id);pk;auto"`
+	Nombre            string `orm:"column(nombre)"`
+	Descripcion       string `orm:"column(descripcion);null"`
+	CodigoAbreviacion string `orm:"column(codigo_abreviacion);null"`
+	Estado            bool   `orm:"column(estado)"`
+	NumeroOrden       string `orm:"column(numero_orden);null"`
 }
 
-func (t *NecesidadRechazada) TableName() string {
-	return "necesidad_rechazada"
+func (t *TipoNecesidad) TableName() string {
+	return "tipo_necesidad"
 }
 
 func init() {
-	orm.RegisterModel(new(NecesidadRechazada))
+	orm.RegisterModel(new(TipoNecesidad))
 }
 
-// AddNecesidadRechazada insert a new NecesidadRechazada into database and returns
+// AddTipoNecesidad insert a new TipoNecesidad into database and returns
 // last inserted Id on success.
-func AddNecesidadRechazada(m *NecesidadRechazada) (id int64, err error) {
+func AddTipoNecesidad(m *TipoNecesidad) (id int64, err error) {
 	o := orm.NewOrm()
-	o.Begin()
-	m.Fecha = time.Now()
-	if _, err = o.Insert(m); err!=nil{
-		o.Rollback()
-		return
-	} else {
-		m.Necesidad.Estado.Id=3;
-		if _,err = o.Update(m.Necesidad); err!=nil{
-			o.Rollback()
-			return
-		}
-	}
-	o.Commit()
+	id, err = o.Insert(m)
 	return
 }
 
-// GetNecesidadRechazadaById retrieves NecesidadRechazada by Id. Returns error if
+// GetTipoNecesidadById retrieves TipoNecesidad by Id. Returns error if
 // Id doesn't exist
-func GetNecesidadRechazadaById(id int) (v *NecesidadRechazada, err error) {
+func GetTipoNecesidadById(id int) (v *TipoNecesidad, err error) {
 	o := orm.NewOrm()
-	v = &NecesidadRechazada{Id: id}
+	v = &TipoNecesidad{Id: id}
 	if err = o.Read(v); err == nil {
 		return v, nil
 	}
 	return nil, err
 }
 
-// GetAllNecesidadRechazada retrieves all NecesidadRechazada matches certain condition. Returns empty list if
+// GetAllTipoNecesidad retrieves all TipoNecesidad matches certain condition. Returns empty list if
 // no records exist
-func GetAllNecesidadRechazada(query map[string]string, fields []string, sortby []string, order []string,
+func GetAllTipoNecesidad(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(NecesidadRechazada)).RelatedSel(5)
+	qs := o.QueryTable(new(TipoNecesidad)).RelatedSel(5)
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute
@@ -111,7 +100,7 @@ func GetAllNecesidadRechazada(query map[string]string, fields []string, sortby [
 		}
 	}
 
-	var l []NecesidadRechazada
+	var l []TipoNecesidad
 	qs = qs.OrderBy(sortFields...)
 	if _, err = qs.Limit(limit, offset).All(&l, fields...); err == nil {
 		if len(fields) == 0 {
@@ -134,11 +123,11 @@ func GetAllNecesidadRechazada(query map[string]string, fields []string, sortby [
 	return nil, err
 }
 
-// UpdateNecesidadRechazada updates NecesidadRechazada by Id and returns error if
+// UpdateTipoNecesidad updates TipoNecesidad by Id and returns error if
 // the record to be updated doesn't exist
-func UpdateNecesidadRechazadaById(m *NecesidadRechazada) (err error) {
+func UpdateTipoNecesidadById(m *TipoNecesidad) (err error) {
 	o := orm.NewOrm()
-	v := NecesidadRechazada{Id: m.Id}
+	v := TipoNecesidad{Id: m.Id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
@@ -149,15 +138,15 @@ func UpdateNecesidadRechazadaById(m *NecesidadRechazada) (err error) {
 	return
 }
 
-// DeleteNecesidadRechazada deletes NecesidadRechazada by Id and returns error if
+// DeleteTipoNecesidad deletes TipoNecesidad by Id and returns error if
 // the record to be deleted doesn't exist
-func DeleteNecesidadRechazada(id int) (err error) {
+func DeleteTipoNecesidad(id int) (err error) {
 	o := orm.NewOrm()
-	v := NecesidadRechazada{Id: id}
+	v := TipoNecesidad{Id: id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
-		if num, err = o.Delete(&NecesidadRechazada{Id: id}); err == nil {
+		if num, err = o.Delete(&TipoNecesidad{Id: id}); err == nil {
 			fmt.Println("Number of records deleted in database:", num)
 		}
 	}
